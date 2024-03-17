@@ -49,9 +49,12 @@ body {
     flex-grow: 1;
 }
 
-.footer {
-    background-color: #212529;
-    color: white;
+.footer a {
+    color: white; 
+}
+
+.footer a:hover {
+    color: #CCCCCC; 
 }
 
 small {
