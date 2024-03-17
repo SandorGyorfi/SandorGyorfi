@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome to www.sandorgyorfi.com{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                www.sandorgyorfi.com
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link" href="#">Appointments</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container text-center">
+        <span>&copy; {{ year }} www.sandorgyorfi.com | All rights reserved.</span>
+    </div>
+</footer>
+
+<script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
