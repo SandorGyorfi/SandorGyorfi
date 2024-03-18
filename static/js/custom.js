@@ -47,3 +47,4 @@ document.addEventListener('DOMContentLoaded', function () {
         navbarSubtitle.style.opacity = 1;
     }, 500);
 });
+

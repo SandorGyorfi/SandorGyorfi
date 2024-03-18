@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RETHLPZ6G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-7RETHLPZ6G');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome to www.sandorgyorfi.com{% endblock %}</title>
@@ -9,33 +16,82 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        #cookieConsentBanner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #343a40; /* Dark theme background */
+            color: #ffffff; /* Text color */
+            padding: 1rem;
+            text-align: center;
+            display: none; /* Initially hidden */
+            z-index: 1050; /* High z-index to ensure visibility */
+        }
+        #acceptCookies {
+            background-color: #007bff; /* Bootstrap primary button color */
+            border-color: #007bff;
+            padding: .375rem .75rem;
+            border-radius: .25rem;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        #acceptCookies:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
+    <div id="cookieConsentBanner">
+        This site uses cookies to improve your experience. 
+        <button id="acceptCookies">Accept</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                document.getElementById('cookieConsentBanner').style.display = 'block';
+            }
+
+            document.getElementById('acceptCookies').addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'true');
+                document.getElementById('cookieConsentBanner').style.display = 'none';
+            });
+        });
+    </script>
     <div class="d-flex flex-column min-vh-100">
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid justify-content-between">
                     <a class="navbar-brand" href="#">
-                        <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                        <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Logo" width="30" height="24"
+                        class="d-inline-block align-text-top">
                         <div class="title-container">
                             <div class="navbar-title" id="navbar-title"></div>
                             <div class="navbar-subtitle" id="navbar-subtitle"></div>
                         </div>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav ms-auto">
-                            <a class="nav-link" href="{% url 'home' %}" data-section="home">Home</a>
-                            <a class="nav-link" href="#" data-section="services">Services</a>
-                            <a class="nav-link" href="#" data-section="blog">Blog</a>
-                            <a class="nav-link" href="#" data-section="appointments">Appointments</a>
-                        </div>
-                    </div>                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="{% url 'home' %}" data-section="home">Home</a>
+                        <a class="nav-link" href="#" data-section="services">Services</a>
+                        <a class="nav-link" href="#" data-section="blog">Blog</a>
+                        <a class="nav-link" href="#" data-section="appointments">Appointments</a>
+                    </div>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
+    </header>
         <main class="container mt-4 flex-grow-1">
             {% block content %}
             {% endblock %}
@@ -47,7 +103,8 @@
                         <span>&copy; {{ year }} www.sandorgyorfi.com | All rights reserved.</span>
                     </div>
                     <div class="col-md-6 d-flex justify-content-md-end align-items-center">
-                        <a href="https://www.linkedin.com" target="_blank" class="text-white me-3" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com" target="_blank" class="text-white me-3"
+                            aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="https://github.com" target="_blank" class="text-white me-3" aria-label="GitHub">
@@ -56,19 +113,16 @@
                         <a href="https://www.tiktok.com" target="_blank" class="text-white me-3" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <!-- Updated link and icon for X -->
                         <a href="https://x.com" target="_blank" class="text-white me-3" aria-label="X">
-                            <i class="fab fa-x"></i> <!-- Assuming 'fa-x' is a placeholder for the actual icon class -->
+                            <i class="fab fa-x"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </footer>
-        
-        
-        
     </div>
     <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
 </body>
+
 </html>
