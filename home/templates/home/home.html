@@ -3,7 +3,6 @@
 {% block title %}Home - www.sandorgyorfi.com{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
 <section class="hero-section py-3 bg-light text-center">
     <div class="container">
         <h1 class="display-5">Welcome to my Website</h1>
@@ -11,85 +10,41 @@
     </div>
 </section>
 
-<!-- Services Section -->
 <section class="services-section py-5">
     <div class="container">
         <h2 class="text-center mb-5">My Services</h2>
         <div class="row">
-            <!-- Service 1 -->
+            {% for service in services %}
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Web Development</h5>
-                        <p class="card-text">I provide high quality web development services. I can help you build your website from scratch or improve your existing one.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <h5 class="card-title">{{ service.title }}</h5>
+                        <p class="card-text">{{ service.description }}</p>
+                        <a href="{{ service.link }}" class="btn btn-primary">Learn More</a>
                     </div>
                 </div>
             </div>
-            <!-- Service 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Consulting</h5>
-                        <p class="card-text">I offer consulting services for web development projects. I can help you plan your project and make strategic decisions.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Service 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Training</h5>
-                        <p class="card-text">I provide training services for individuals and teams. I can help you learn web development and improve your skills.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Latest News Section -->
-<section class="latest-news-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">Latest News</h2>
-        <div class="row">
-            <!-- News 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 1</h5>
-                        <p class="card-text">Here is some latest news about my work and projects. Stay tuned for more updates.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- News 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 2</h5>
-                        <p class="card-text">Here is some latest news about my work and projects. Stay tuned for more updates.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- News 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">News Title 3</h5>
-                        <p class="card-text">Here is some latest news about my work and projects. Stay tuned for more updates.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
+<div class="row">
+    {% for post in latest_blog_posts %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.excerpt }}</p>
+                <a href="#" class="btn btn-primary">Read More</a>
             </div>
         </div>
     </div>
-</section>
+    {% endfor %}
+</div>
 
-<!-- About Me Section -->
+
 <section class="about-section py-5">
     <div class="container">
         <h2 class="text-center mb-5">About Me</h2>

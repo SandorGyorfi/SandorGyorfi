@@ -30,16 +30,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    if (pathname === "/" || pathname.includes('home')) {
-        navbarTitle.textContent = 'Home';
-        navbarSubtitle.textContent = 'Welcome to my site';
-    } else if (pathname.includes('services')) {
-        navbarTitle.textContent = 'Services';
-        navbarSubtitle.textContent = 'What we offer';
-    } else if (pathname.includes('blog')) {
-        navbarTitle.textContent = 'Blog';
-        navbarSubtitle.textContent = 'Latest news';
-    }
+
+if (pathname === "/" || pathname.includes('home')) {
+    navbarTitle.textContent = 'Home';
+    navbarSubtitle.textContent = 'Welcome to my site';
+} else if (pathname.includes('services')) {
+    navbarTitle.textContent = 'Services';
+    navbarSubtitle.textContent = 'What I offer';
+} else if (pathname.includes('blog')) {
+    navbarTitle.textContent = 'Blog';
+    navbarSubtitle.textContent = 'My latest news';
+}
+
 
     setActiveNavLink();
 
