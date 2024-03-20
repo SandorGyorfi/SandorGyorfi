@@ -98,30 +98,33 @@
             {% block content %}
             {% endblock %}
         </main>
-        <footer class="footer mt-auto py-3 bg-dark text-white">
+        <footer class="footer mt-auto py-1 bg-dark text-white">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-center">
-                        <span>&copy; {{ year }} www.sandorgyorfi.com | All rights reserved.</span>
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6 text-center text-md-left mb-3 mb-md-0">
+                        <a href="{% url 'home' %}" class="footer-logo-link">
+                            <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Logo" class="footer-logo">
+                        </a>
+                        <span class="footer-text">&copy; {% now "Y" %} | All rights reserved.</span>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-md-end align-items-center">
-                        <a href="https://www.linkedin.com" target="_blank" class="text-white me-3"
-                            aria-label="LinkedIn">
+                    <div class="social-icons col-12 col-md-6 text-center text-md-right">
+                        <a href="https://www.linkedin.com" target="_blank" class="text-white mx-2" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com" target="_blank" class="text-white me-3" aria-label="GitHub">
+                        <a href="https://github.com" target="_blank" class="text-white mx-2" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.tiktok.com" target="_blank" class="text-white me-3" aria-label="TikTok">
+                        <a href="https://www.tiktok.com" target="_blank" class="text-white mx-2" aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://x.com" target="_blank" class="text-white me-3" aria-label="X">
+                        <a href="https://x.com" target="_blank" class="text-white mx-2" aria-label="X">
                             <i class="fab fa-x"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </footer>
+        
     </div>
     <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>

@@ -15,13 +15,11 @@
         <h2 class="text-center mb-5">My Services</h2>
         <div class="row">
             {% for service in services %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ service.title }}</h5>
-                        <p class="card-text">{{ service.description }}</p>
-                        <a href="{{ service.link }}" class="btn btn-primary">Learn More</a>
-                    </div>
+            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                <div class="service-item p-4 bg-light border rounded">
+                    <h5 class="service-title">{{ service.title }}</h5>
+                    <p class="service-description">{{ service.description }}</p>
+                    <a href="{{ service.link }}" class="mt-auto btn btn-primary">Learn More</a>
                 </div>
             </div>
             {% endfor %}

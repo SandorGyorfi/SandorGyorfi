@@ -1,52 +1,48 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const pathname = window.location.pathname;
+    const sectionTitles = document.querySelectorAll('h2, h3');
     const navbarTitle = document.getElementById('navbar-title');
     const navbarSubtitle = document.getElementById('navbar-subtitle');
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    let currentTitleIndex = 0;
 
-    navbarSubtitle.style.opacity = 0;
-    navbarSubtitle.style.transition = 'opacity 0.5s ease-in-out';
-
-    function removeActiveClass() {
-        navLinks.forEach(link => {
-            link.classList.remove('nav-active');
-        });
+    function cycleSectionTitles() {
+        if (sectionTitles.length > 0) {
+            navbarSubtitle.style.opacity = 0;
+            setTimeout(function () {
+                navbarSubtitle.textContent = sectionTitles[currentTitleIndex].textContent;
+                navbarSubtitle.style.opacity = 1;
+                currentTitleIndex = (currentTitleIndex + 1) % sectionTitles.length;
+            }, 500);
+        }
     }
+
+    cycleSectionTitles();
+    setInterval(cycleSectionTitles, 4000);
+
+    const pathname = window.location.pathname;
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
     function setActiveNavLink() {
         let section = 'home';
         if (pathname.includes('services')) {
             section = 'services';
+            navbarTitle.textContent = 'Services';
         } else if (pathname.includes('blog')) {
             section = 'blog';
+            navbarTitle.textContent = 'Blog';
         } else if (pathname.includes('appointments')) {
             section = 'appointments';
+            navbarTitle.textContent = 'Appointments';
+        } else {
+            navbarTitle.textContent = 'Home';
         }
 
-        removeActiveClass();
-        const activeLink = document.querySelector(`.navbar-nav .nav-link[data-section="${section}"]`);
-        if (activeLink) {
-            activeLink.classList.add('nav-active');
-        }
+        navLinks.forEach(link => {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('href').includes(section)) {
+                link.classList.add('nav-active');
+            }
+        });
     }
 
-
-if (pathname === "/" || pathname.includes('home')) {
-    navbarTitle.textContent = 'Home';
-    navbarSubtitle.textContent = 'Welcome to my site';
-} else if (pathname.includes('services')) {
-    navbarTitle.textContent = 'Services';
-    navbarSubtitle.textContent = 'What I offer';
-} else if (pathname.includes('blog')) {
-    navbarTitle.textContent = 'Blog';
-    navbarSubtitle.textContent = 'My latest news';
-}
-
-
     setActiveNavLink();
-
-    setTimeout(() => {
-        navbarSubtitle.style.opacity = 1;
-    }, 500);
 });
-

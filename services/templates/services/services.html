@@ -3,24 +3,20 @@
 {% block title %}Services - www.sandorgyorfi.com{% endblock %}
 
 {% block content %}
-<section class="services-section py-5">
+<section class="services-section py-5 bg-light">
     <div class="container">
-        <h2 class="section-title">Our Services</h2>
-        <div class="row">
-            {% for service in services %}
-                <div class="col-md-6 mb-4">
-                    <div class="service-item">
-                        <h3 class="service-title">{{ service.title }}</h3>
-                        <p class="service-description">{{ service.description }}</p>
-                        {% if service.link %}
-                            <a href="{{ service.link }}" class="btn btn-primary">Learn More</a>
-                        {% endif %}
-                    </div>
-                </div>
-            {% empty %}
-                <p>No services available at the moment. Please check back later.</p>
-            {% endfor %}
-        </div>
+        <h2 class="section-title text-center mb-5">My Services</h2>
+        {% for service in services %}
+            <div class="service-detail mb-5">
+                <h3 class="service-title mb-3">{{ service.title }}</h3>
+                <p class="service-description">{{ service.description }}</p>
+                {% if service.link %}
+                    <a href="{{ service.link }}" class="mt-3 btn btn-outline-primary">Learn More</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p class="text-center">Currently, there are no services listed. Please check back later.</p>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
