@@ -3,59 +3,23 @@
 {% block title %}Services - www.sandorgyorfi.com{% endblock %}
 
 {% block content %}
-<section class="services-section">
+<section class="services-section py-5">
     <div class="container">
         <h2 class="section-title">Our Services</h2>
         <div class="row">
-            <div class="col-md-6">
-                <div class="service-item">
-                    <h3 class="service-title">Customised Customer Relationship Management Solutions</h3>
-                    <p class="service-description">Crafting tailor-made CRM solutions to fit business needs like a glove, fine-tuning databases, tracking client interactions, and seamlessly integrating automated communication tools.</p>
+            {% for service in services %}
+                <div class="col-md-6 mb-4">
+                    <div class="service-item">
+                        <h3 class="service-title">{{ service.title }}</h3>
+                        <p class="service-description">{{ service.description }}</p>
+                        {% if service.link %}
+                            <a href="{{ service.link }}" class="btn btn-primary">Learn More</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="service-item">
-                    <h3 class="service-title">Tailored E-Commerce Platforms</h3>
-                    <p class="service-description">Designing bespoke e-commerce solutions that match client requirements down to a tee, prioritising slick design, secure payments, and comprehensive stock management.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Professional Business Website Creation</h3>
-                    <p class="service-description">Building top-notch websites with a keen eye on SEO, mobile responsiveness, and delivering a stellar user experience.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Workflow Automation</h3>
-                    <p class="service-description">Providing automation solutions to streamline operations in HR, finance, and operations, including slick document management and customisable reporting tools.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Custom Web Application Development</h3>
-                    <p class="service-description">Developing scalable, secure web applications to tackle unique business challenges head-on.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="service-item">
-                    <h3 class="service-title">Integrated Office Productivity Tools</h3>
-                    <p class="service-description">Crafting productivity and collaboration tools to make office life smoother and support flexible working arrangements.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Office Data Insights and Analysis</h3>
-                    <p class="service-description">Delivering tailored data management and analysis solutions to sharpen office operations and financial management.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Smart Office Automation Systems</h3>
-                    <p class="service-description">Creating custom automation setups to take the drudgery out of office tasks, with a focus on efficient document handling, HR processes, and inventory management.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Warehouse Management and Logistics Solutions</h3>
-                    <p class="service-description">Providing custom solutions to supercharge warehouse and logistics operations, including real-time stock management, seamless supply chain integration, and automated warehouse tasks.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-title">Additional Services:</h3>
-                    <ul class="service-description">
-                        <li>Client Dashboard - Offering clients an additional service to keep tabs on project progress in real-time, keeping them in the loop every step of the way.</li>
-                        <li>Consultation - Setting up virtual meetings for discussing potential system improvements, packed with insights and actionable advice, all wrapped up in an hour.</li>
-                        <li>Complete Situation Assessment - Going the extra mile with a thorough 3-day on-site assessment, providing a deep dive into business operations and processes.</li>
-                        <li>Security and Confidential Handling - Rest assured, all services come with solid insurance and a confidentiality guarantee, ensuring top-notch work and information security.</li>
-                    </ul>
-                </div>
-            </div>
+            {% empty %}
+                <p>No services available at the moment. Please check back later.</p>
+            {% endfor %}
         </div>
     </div>
 </section>

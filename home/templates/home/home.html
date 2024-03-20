@@ -37,22 +37,30 @@
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text">{{ post.excerpt }}</p>
-                <a href="#" class="btn btn-primary">Read More</a>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 
-
 <section class="about-section py-5">
     <div class="container">
         <h2 class="text-center mb-5">About Me</h2>
-        <p>I am a web developer with a passion for creating high quality websites. I have a strong background in both front-end and back-end development, and I am always eager to learn new technologies and improve my skills.</p>
-        <p>With over a decade of experience in the field, I've worked on a wide range of projects, from small personal websites to large-scale enterprise applications. I am proficient in a variety of programming languages and frameworks, including but not limited to HTML, CSS, JavaScript, Python, Django, and React.</p>
-        <p>My approach to web development is centered around the user. I believe that a website should not only be functional and performant, but also provide a great user experience. I strive to write clean, efficient, and maintainable code that adheres to best practices.</p>
-        <p>In addition to my technical skills, I bring a strong work ethic and a collaborative mindset to every project. I enjoy problem-solving and thrive in environments that challenge me to learn and grow.</p>
-        <p>When I'm not coding, I enjoy reading, hiking, and spending time with my family. I am also a lifelong learner who is always looking for the next thing to learn, whether it's a new programming language, a new web development tool, or a new best practice in the industry.</p>
+        <p>I am a web developer with a passion for creating high quality websites. I have a strong background in both
+            front-end and back-end development, and I am always eager to learn new technologies and improve my skills.
+        </p>
+        <p>With over a decade of experience in the field, I've worked on a wide range of projects, from small personal
+            websites to large-scale enterprise applications. I am proficient in a variety of programming languages and
+            frameworks, including but not limited to HTML, CSS, JavaScript, Python, Django, and React.</p>
+        <p>My approach to web development is centered around the user. I believe that a website should not only be
+            functional and performant, but also provide a great user experience. I strive to write clean, efficient, and
+            maintainable code that adheres to best practices.</p>
+        <p>In addition to my technical skills, I bring a strong work ethic and a collaborative mindset to every project.
+            I enjoy problem-solving and thrive in environments that challenge me to learn and grow.</p>
+        <p>When I'm not coding, I enjoy reading, hiking, and spending time with my family. I am also a lifelong learner
+            who is always looking for the next thing to learn, whether it's a new programming language, a new web
+            development tool, or a new best practice in the industry.</p>
         <a href="#" class="btn btn-primary">Learn More</a>
     </div>
 </section>
