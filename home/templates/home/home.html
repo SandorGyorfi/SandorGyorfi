@@ -31,20 +31,24 @@
     </div>
 </section>
 
-<div class="row">
-    {% for post in latest_blog_posts %}
-    <div class="col-md-4 mb-4">
-        <article class="card">
-            <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.excerpt }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary" aria-label="Read more about {{ post.title }}">Read More</a>
+<section class="blog-section py-5">
+    <div class="container">
+        <header class="section-header text-center mb-5">
+            <h2>Latest Blog Posts</h2>
+        </header>
+        <div class="row">
+            {% for post in latest_blog_posts %}
+            <div class="col-md-4 mb-4 d-flex align-items-stretch">
+                <article class="blog-post-item p-4 bg-light border rounded">
+                    <h5 class="blog-post-title">{{ post.title }}</h5>
+                    <p class="blog-post-excerpt">{{ post.excerpt }}</p>
+                    <a href="{{ post.get_absolute_url }}" class="mt-auto btn btn-primary" aria-label="Read more about {{ post.title }}">Read More</a>
+                </article>
             </div>
-        </article>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 
 <section class="about-section py-5">
     <div class="container">
@@ -68,5 +72,4 @@
             <a href="#" class="btn btn-primary" aria-label="Learn more about Sándor Győrfi">Learn More</a>
         </div>
     </section>
-    
-    {% endblock %}
+{% endblock %}
