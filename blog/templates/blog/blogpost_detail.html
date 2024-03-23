@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ blogpost.title }}</h1>
-  <p>{{ blogpost.content }}</p>
-  <p>{{ blogpost.created_at }}</p>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title">{{ blogpost.title }}</h2>
+      <p class="card-text">{{ blogpost.content }}</p>
+      <p class="card-text"><small class="text-muted">{{ blogpost.created_at }}</small></p>
+    </div>
+  </div>
 {% endblock %}
