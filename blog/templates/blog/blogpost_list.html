@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Blog Posts</h1>
+  {% for blogpost in blogposts %}
+    <h2><a href="{{ blogpost.get_absolute_url }}">{{ blogpost.title }}</a></h2>
+    <p>{{ blogpost.created_at }}</p>
+  {% empty %}
+    <p>No blog posts yet.</p>
+  {% endfor %}
+{% endblock %}

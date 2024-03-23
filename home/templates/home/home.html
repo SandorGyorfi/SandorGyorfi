@@ -1,26 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Home - www.sandorgyorfi.com{% endblock %}
+{% block title %}Home - Sándor Győrfi{% endblock %}
 
 {% block content %}
 <section class="hero-section py-3 bg-light text-center">
     <div class="container">
-        <h1 class="display-5">Welcome to my Website</h1>
-        <p class="lead">This is a personal website where I share my work and thoughts.</p>
+        <header class="section-header">
+            <h1 class="display-5">Welcome to Sándor Győrfi's Website</h1>
+            <p class="lead">A place to share my work, thoughts, and professional services.</p>
+        </header>
     </div>
 </section>
 
 <section class="services-section py-5">
     <div class="container">
-        <h2 class="text-center mb-5">My Services</h2>
+        <header class="section-header text-center mb-5">
+            <h2>Professional Services</h2>
+        </header>
         <div class="row">
             {% for service in services %}
             <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="service-item p-4 bg-light border rounded">
+                <article class="service-item p-4 bg-light border rounded">
                     <h5 class="service-title">{{ service.title }}</h5>
                     <p class="service-description">{{ service.description }}</p>
-                    <a href="{{ service.link }}" class="mt-auto btn btn-primary">Learn More</a>
-                </div>
+                    <a href="{{ service.link }}" class="mt-auto btn btn-primary" aria-label="Learn more about {{ service.title }}">Learn More</a>
+                </article>
             </div>
             {% endfor %}
         </div>
@@ -30,21 +34,23 @@
 <div class="row">
     {% for post in latest_blog_posts %}
     <div class="col-md-4 mb-4">
-        <div class="card">
+        <article class="card">
             <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}">
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text">{{ post.excerpt }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-primary" aria-label="Read more about {{ post.title }}">Read More</a>
             </div>
-        </div>
+        </article>
     </div>
     {% endfor %}
 </div>
 
 <section class="about-section py-5">
     <div class="container">
-        <h2 class="text-center mb-5">About Me</h2>
+        <header class="section-header text-center mb-5">
+            <h2>About Sándor Győrfi</h2>
+        </header>
         <p>I am a web developer with a passion for creating high quality websites. I have a strong background in both
             front-end and back-end development, and I am always eager to learn new technologies and improve my skills.
         </p>
@@ -59,8 +65,8 @@
         <p>When I'm not coding, I enjoy reading, hiking, and spending time with my family. I am also a lifelong learner
             who is always looking for the next thing to learn, whether it's a new programming language, a new web
             development tool, or a new best practice in the industry.</p>
-        <a href="#" class="btn btn-primary">Learn More</a>
-    </div>
-</section>
-
-{% endblock %}
+            <a href="#" class="btn btn-primary" aria-label="Learn more about Sándor Győrfi">Learn More</a>
+        </div>
+    </section>
+    
+    {% endblock %}
