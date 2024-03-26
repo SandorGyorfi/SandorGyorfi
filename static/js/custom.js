@@ -46,3 +46,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setActiveNavLink();
 });
+
+document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '{{ blogpost.title }}',
+          url: '{{ request.build_absolute_uri }}'
+        });
+        console.log('Content shared successfully');
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      document.getElementById('fallbackShare').style.display = 'block';
+    }
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText('{{ request.build_absolute_uri }}').then(() => {
+      alert('Link copied to clipboard!');
+    }, (err) => {
+      console.error('Error copying link:', err);
+      alert('Failed to copy link.');
+    });
+  });
