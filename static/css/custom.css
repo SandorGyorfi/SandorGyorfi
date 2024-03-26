@@ -220,6 +220,10 @@ a:hover {
 
 .blogpost-share {
     margin-top: 20px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
   
 .blogpost-share h4 {
@@ -227,8 +231,7 @@ a:hover {
     color: #333; 
 }
   
-/* Updated Share Link Button Styling */
-.blogpost-share a {
+.blogpost-share a.share-link {
     display: inline-block;
     margin-right: 10px;
     padding: 5px 10px;
@@ -239,7 +242,7 @@ a:hover {
     transition: background-color 0.3s ease;
 }
   
-.blogpost-share a:hover {
+.blogpost-share a.share-link:hover {
     background-color: #343a40; 
     color: white;
 }

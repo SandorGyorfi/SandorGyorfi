@@ -10,16 +10,15 @@
 </div>
 
 <!-- Share and Copy Link Buttons -->
-<button class="btn btn-primary" id="shareBtn"><i class="fas fa-share-alt"></i></button>
+<button class="btn btn-primary" id="shareBtn"><i class="fas fa-share-alt" aria-hidden="true"></i> Share</button>
 <button class="btn btn-primary" id="copyBtn">Copy Link</button>
 
 <!-- Fallback Social Share Links -->
-<div id="fallbackShare" style="display:none;">
+<div id="fallbackShare" class="blogpost-share" style="display: none;">
   <h4>Share this Post On</h4>
-  <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">Facebook</a>
-  <a href="https://twitter.com/intent/tweet?text={{ blogpost.title }}&url={{ request.build_absolute_uri }}" target="_blank">X</a>
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ blogpost.title }}" target="_blank">LinkedIn</a>
+  <a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" aria-label="Share on Facebook">Facebook</a>
+  <a class="share-link" href="https://twitter.com/intent/tweet?text={{ blogpost.title|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" aria-label="Share on Twitter">Twitter</a>
+  <a class="share-link" href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ blogpost.title|urlencode }}" target="_blank" aria-label="Share on LinkedIn">LinkedIn</a>
 </div>
-
 
 {% endblock %}

@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM fully loaded and parsed");
+
+    // Cycle through section titles for dynamic navbar subtitle
     const sectionTitles = document.querySelectorAll('h2, h3');
     const navbarTitle = document.getElementById('navbar-title');
     const navbarSubtitle = document.getElementById('navbar-subtitle');
     let currentTitleIndex = 0;
 
     function cycleSectionTitles() {
+        console.log("Cycling through section titles");
         if (sectionTitles.length > 0) {
             navbarSubtitle.style.opacity = 0;
             setTimeout(function () {
@@ -18,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
     cycleSectionTitles();
     setInterval(cycleSectionTitles, 4000);
 
+    // Set active link based on current pathname
     const pathname = window.location.pathname;
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
     function setActiveNavLink() {
+        console.log("Setting active nav link");
         let section = 'home';
         if (pathname.includes('services')) {
             section = 'services';
@@ -45,29 +51,39 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     setActiveNavLink();
-});
 
-document.getElementById('shareBtn').addEventListener('click', async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: '{{ blogpost.title }}',
-          url: '{{ request.build_absolute_uri }}'
+    // Toggle Share Links
+    const shareBtn = document.getElementById('shareBtn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function() {
+            const shareLinks = document.getElementById('fallbackShare');
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title, 
+                    url: window.location.href 
+                }).then(() => console.log('Content shared successfully'))
+                  .catch((err) => console.error('Error sharing:', err));
+            } else {
+                console.log('Navigator share not available. Showing fallback.');
+                shareLinks.style.display = shareLinks.style.display === 'none' ? 'block' : 'none';
+            }
         });
-        console.log('Content shared successfully');
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      document.getElementById('fallbackShare').style.display = 'block';
     }
-  });
 
-  document.getElementById('copyBtn').addEventListener('click', () => {
-    navigator.clipboard.writeText('{{ request.build_absolute_uri }}').then(() => {
-      alert('Link copied to clipboard!');
-    }, (err) => {
-      console.error('Error copying link:', err);
-      alert('Failed to copy link.');
-    });
-  });
+    // Copy button functionality
+    const copyBtn = document.getElementById('copyBtn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(window.location.href) 
+            .then(() => {
+                alert('Link copied to clipboard!');
+                console.log('Link copied successfully');
+            })
+            .catch((err) => {
+                console.error('Error copying link:', err);
+                alert('Failed to copy link.');
+            });
+        });
+    }
+});
+    
