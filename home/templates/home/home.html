@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Sándor Győrfi{% endblock %}
+{% block title %}Home - Sandor Gyorfi{% endblock %}
 
 {% block content %}
+
 <section class="hero-section py-3 bg-light text-center">
     <div class="container">
         <header class="section-header">
-            <h1 class="display-5">Welcome to Sándor Győrfi's Website</h1>
+            <h1 class="display-5">Welcome to Sandor Gyorfi's Website</h1>
             <p class="lead">A place to share my work, thoughts, and professional services.</p>
         </header>
     </div>
@@ -31,21 +32,35 @@
     </div>
 </section>
 
-<section class="blog-section py-5">
+<section class="blog-slider-section py-5" style="background-color: #f5f5f5;">
     <div class="container">
         <header class="section-header text-center mb-5">
-            <h2>Latest Blog Posts</h2>
+            <h2>Featured Blog Posts</h2>
         </header>
-        <div class="row">
-            {% for post in latest_blog_posts %}
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <article class="blog-post-item p-4 bg-light border rounded">
-                    <h5 class="blog-post-title">{{ post.title }}</h5>
-                    <p class="blog-post-excerpt">{{ post.excerpt }}</p>
-                    <a href="{{ post.get_absolute_url }}" class="mt-auto btn btn-primary" aria-label="Read more about {{ post.title }}">Read More</a>
-                </article>
+        <!-- Slider main container -->
+        <div class="swiper mySwiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                {% for post in latest_blog_posts %}
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.excerpt }}</p>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </div>
 </section>
@@ -53,23 +68,15 @@
 <section class="about-section py-5">
     <div class="container">
         <header class="section-header text-center mb-5">
-            <h2>About Sándor Győrfi</h2>
+            <h2>About Sandor Gyorfi</h2>
         </header>
-        <p>I am a web developer with a passion for creating high quality websites. I have a strong background in both
-            front-end and back-end development, and I am always eager to learn new technologies and improve my skills.
-        </p>
-        <p>With over a decade of experience in the field, I've worked on a wide range of projects, from small personal
-            websites to large-scale enterprise applications. I am proficient in a variety of programming languages and
-            frameworks, including but not limited to HTML, CSS, JavaScript, Python, Django, and React.</p>
-        <p>My approach to web development is centered around the user. I believe that a website should not only be
-            functional and performant, but also provide a great user experience. I strive to write clean, efficient, and
-            maintainable code that adheres to best practices.</p>
-        <p>In addition to my technical skills, I bring a strong work ethic and a collaborative mindset to every project.
-            I enjoy problem-solving and thrive in environments that challenge me to learn and grow.</p>
-        <p>When I'm not coding, I enjoy reading, hiking, and spending time with my family. I am also a lifelong learner
-            who is always looking for the next thing to learn, whether it's a new programming language, a new web
-            development tool, or a new best practice in the industry.</p>
-            <a href="#" class="btn btn-primary" aria-label="Learn more about Sándor Győrfi">Learn More</a>
-        </div>
-    </section>
+        <p>I am a web developer with a passion for creating high-quality websites. I have a strong background in both front-end and back-end development, and I am always eager to learn new technologies and improve my skills.</p>
+        <p>With over a decade of experience in the field, I've worked on a wide range of projects, from small personal websites to large-scale enterprise applications. I am proficient in a variety of programming languages and frameworks, including but not limited to HTML, CSS, JavaScript, Python, Django, and React.</p>
+        <p>My approach to web development is centered around the user. I believe that a website should not only be functional and performant but also provide a great user experience. I strive to write clean, efficient, and maintainable code that adheres to best practices.</p>
+        <p>In addition to my technical skills, I bring a strong work ethic and a collaborative mindset to every project. I enjoy problem-solving and thrive in environments that challenge me to learn and grow.</p>
+        <p>When I'm not coding, I enjoy reading, hiking, and spending time with my family. I am also a lifelong learner who is always looking for the next thing to learn, whether it's a new programming language, a new web development tool, or a new best practice in the industry.</p>
+        <a href="#" class="btn btn-primary" aria-label="Learn more about Sandor Gyorfi">Learn More</a>
+    </div>
+</section>
+
 {% endblock %}
