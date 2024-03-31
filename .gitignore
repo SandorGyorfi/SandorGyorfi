@@ -1,4 +1,5 @@
 venv/
 .env
 __pycache__/
-
+/www.sandorgyorfi.com/paof.py
+/www.sandorgyorfi.com/paob.py

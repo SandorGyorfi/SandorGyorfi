@@ -29,30 +29,30 @@ document.addEventListener("DOMContentLoaded", function () {
   function setActiveNavLink() {
     console.log("Setting active nav link");
     let section = "home";
-    navbarTitle.style.opacity = '0';
+    navbarTitle.style.opacity = "0";
 
     setTimeout(() => {
-      let iconHtml = '';
-      let sectionText = ''; 
+      let iconHtml = "";
+      let sectionText = "";
       if (pathname.includes("services")) {
         section = "services";
         iconHtml = '<i class="fas fa-briefcase"></i>';
-        sectionText = 'Services';
+        sectionText = "Services";
       } else if (pathname.includes("blog")) {
         section = "blog";
         iconHtml = '<i class="fas fa-blog"></i>';
-        sectionText = 'Blog';
+        sectionText = "Blog";
       } else if (pathname.includes("appointments")) {
         section = "appointments";
         iconHtml = '<i class="fas fa-calendar-check"></i>';
-        sectionText = 'Appointments';
+        sectionText = "Appointments";
       } else {
         iconHtml = '<i class="fas fa-home"></i>';
-        sectionText = 'Home';
+        sectionText = "Home";
       }
 
       navbarTitle.innerHTML = `${sectionText} ${iconHtml}`;
-      navbarTitle.style.opacity = '1';
+      navbarTitle.style.opacity = "1";
 
       navLinks.forEach((link) => {
         link.classList.remove("nav-active");
@@ -60,11 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
           link.classList.add("nav-active");
         }
       });
-    }, 500); 
-}
-
-
-
+    }, 500);
+  }
 
   setActiveNavLink();
 
@@ -106,3 +103,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+

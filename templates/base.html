@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RETHLPZ6G"></script>
@@ -11,8 +13,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Welcome to www.sandorgyorfi.com{% endblock %}</title>
-    {% load static %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -22,15 +26,15 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #343a40; 
-            color: #ffffff; 
+            background-color: #343a40;
+            color: #ffffff;
             padding: 1rem;
             text-align: center;
-            display: none; 
-            z-index: 1050; 
+            display: none;
+            z-index: 1050;
         }
         #acceptCookies {
-            background-color: #007bff; 
+            background-color: #007bff;
             border-color: #007bff;
             padding: .375rem .75rem;
             border-radius: .25rem;
@@ -46,18 +50,16 @@
 </head>
 <body>
     <div id="cookieConsentBanner">
-        This site uses cookies to improve your experience. 
+        This site uses cookies to improve your experience.
         <button id="acceptCookies">Accept</button>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var consent = localStorage.getItem('cookieConsent');
             if (!consent) {
                 document.getElementById('cookieConsentBanner').style.display = 'block';
             }
-
-            document.getElementById('acceptCookies').addEventListener('click', function() {
+            document.getElementById('acceptCookies').addEventListener('click', function () {
                 localStorage.setItem('cookieConsent', 'true');
                 document.getElementById('cookieConsentBanner').style.display = 'none';
             });
@@ -68,30 +70,28 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid justify-content-between">
                     <a class="navbar-brand" href="#">
-                        <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Sándor Győrfi Logo" width="30" height="24"
-                        class="d-inline-block align-text-top">
+                        <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Sándor Győrfi Logo" width="30"
+                            height="24" class="d-inline-block align-text-top">
                         <div class="title-container">
                             <div class="navbar-title" id="navbar-title"></div>
                             <div class="navbar-subtitle" id="navbar-subtitle"></div>
                         </div>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link" href="{% url 'home' %}" data-section="home">Home</a>
-                        <a class="nav-link" href="{% url 'services' %}" data-section="services">My Services</a>
-                        <a class="nav-link" href="{% url 'blogpost_list' %}" data-section="blog">Blog</a>
-                        <a class="nav-link" href="#" data-section="appointments">Book an Appointment</a>
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" href="{% url 'home' %}" data-section="home">Home</a>
+                            <a class="nav-link" href="{% url 'services' %}" data-section="services">My Services</a>
+                            <a class="nav-link" href="{% url 'blogpost_list' %}" data-section="blog">Blog</a>
+                            <a class="nav-link" href="#" data-section="appointments">Book an Appointment</a>
+                        </div>
                     </div>
-                    
                 </div>
-            </div>
-        </nav>
+            </nav>
         </header>
         <main class="container mt-4 flex-grow-1">
             {% block content %}
@@ -102,7 +102,8 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6 text-center text-md-left mb-3 mb-md-0">
                         <a href="{% url 'home' %}" class="footer-logo-link">
-                            <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Sandor Gyorfi Logo" class="footer-logo">
+                            <img src="{% static 'img/sandorgyorfi_logo.jpg' %}" alt="Sandor Gyorfi Logo"
+                                class="footer-logo">
                         </a>
                         <span class="footer-text">&copy; {% now "Y" %} Sandor Gyorfi | All rights reserved.</span>
                     </div>
@@ -123,11 +124,8 @@
                 </div>
             </div>
         </footer>
-        
     </div>
     <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    
 </body>
-
 </html>
