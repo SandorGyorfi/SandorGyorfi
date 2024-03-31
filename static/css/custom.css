@@ -45,8 +45,9 @@ h6 {
 }
 
 p {
-    margin-bottom: 1em;
-    color: #626466;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
 }
 
 a {
@@ -232,15 +233,23 @@ a:hover, a:focus {
     box-shadow: 0 12px 24px rgba(0,0,0,0.5);
 }
 
+.service-detail {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
 .service-title {
+    color: #007bff;
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-.service-description {
+.service-description p {
     font-size: 1rem;
     line-height: 1.5;
+    color: #333;
 }
 
 .footer {
