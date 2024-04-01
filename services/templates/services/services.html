@@ -12,12 +12,10 @@
         {% for service in services %}
             <article class="service-detail mb-5">
                 <h3 class="service-title mb-3">{{ service.title }}</h3>
-                <div class="service-description">
-                    {{ service.description|linebreaks }}
+                <div class="service-short-description">
+                    {{ service.short_description|linebreaks }}
                 </div>
-                {% if service.link %}
-                    <a href="{{ service.link }}" class="btn btn-outline-primary mt-2" aria-label="Learn more about {{ service.title }}">Learn More</a>
-                {% endif %}
+                <a href="{% url 'service_detail' service.pk %}" class="btn btn-primary">Learn More</a>
             </article>
         {% empty %}
             <p class="text-center">I'm currently updating my services to bring you the latest and greatest. Check back soon!</p>

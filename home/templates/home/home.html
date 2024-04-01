@@ -37,29 +37,28 @@
 </section>
 
 <!-- Services Section -->
-<section class="services-section py-5 bg-light"> 
+<section class="services-section py-5 bg-light">
     <div class="container">
         <header class="mb-5 text-center">
-            <h2 class="section-title mb-3">Professional Services</h2>
-            <p class="lead text-muted">Exploring the blend of tech and creativity through my services.</p>
-                </header>
-        <div class="row g-4">
+            <h2 class="section-title mb-3">Featured Services</h2>
+            <p class="lead text-muted">A glimpse into the range of web solutions we offer.</p>
+        </header>
+        <div class="row">
             {% for service in services %}
             <div class="col-md-4">
-                <div class="card shadow border-0 h-100">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ service.title }}</h5>
-                        <p class="card-text">{{ service.description }}</p>
+                        <p class="card-text">{{ service.short_description }}</p>
+                        <a href="{% url 'service_detail' service.pk %}" class="btn btn-primary">Learn More</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <div class="text-center mt-4">
-            <a href="{% url 'services' %}" class="btn btn-outline-primary">View All Services</a>
-        </div>
     </div>
 </section>
+
 
 <!-- Blog Section -->
 <section class="blog-section py-5 bg-light">
