@@ -216,6 +216,29 @@ a:hover, a:focus {
     color: #a1a1a1;
 }
 
+.service-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-title {
+    height: 64px;
+    margin-bottom: 15px; 
+}
+
+.card-text {
+    flex-grow: 1;
+    margin-bottom: 20px; 
+    margin-top: 20px; 
+
+}
+
+.btn-outline-primary {
+    margin-top: auto; 
+}
+
+
 .services-section {
     padding: 60px 0;
     background-color: #ffffff;
@@ -266,6 +289,16 @@ a:hover, a:focus {
    font-size: 95%;
 }
 
+.section-divider {
+    border: 0px;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
+    margin: 4rem 0; 
+}
+
+
+
+
 .footer {
     background-color: #333;
     color: #fff;
@@ -282,6 +315,12 @@ a:hover, a:focus {
     border-top-right-radius: 0;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 0rem;
+}
+
+.hero-introduction-section .section-title,
+.hero-introduction-section .lead,
+.hero-introduction-section p {
+    text-align: left;
 }
 
 .footer-text {
@@ -308,6 +347,23 @@ a:hover, a:focus {
     .social-icons {
         margin-top: 1rem;
     }
+    
+    .hero-introduction-section .section-title,
+    .hero-introduction-section .lead,
+    .hero-introduction-section p {
+        text-align: center; 
+
+    }
+}
+
+@media (min-width: 992px) { 
+    .services-section .section-title, 
+    .services-section p,
+    .blog-section .section-title, 
+    .blog-section p {
+        text-align: left; 
+    }
+
 }
 
 .blogpost-share {

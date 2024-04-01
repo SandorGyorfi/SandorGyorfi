@@ -4,62 +4,47 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section bg-light text-center py-5">
+<section class="hero-introduction-section py-5 bg-light">
     <div class="container">
-        <h1 class="display-4">Welcome to My Website</h1>
-        <p class="lead">A place to share my work, thoughts, and professional services.</p>
-    </div>
-</section>
-<!-- About Section -->
-<section class="about-section py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <header class="section-header text-center mb-5">
-                    <h2>About Me</h2>
-                    <p class="lead">Combining technology and creativity to build impactful web solutions.</p>
-                </header>
-                <p>Hello there! I'm Sandor, a 39-year-old web developer based in the vibrant city of Bristol, UK. Last year, I took a significant leap in my career by earning a Diploma in Web Application Development, rounding off over a decade of business experience with some serious coding skills.</p>
-
-                <p>My journey into web development wasn't just about adding another feather to my cap; it was about turning my passion for technology into tangible skills that can create, innovate, and solve problems. Whether it's spinning up a small personal site or engineering the backend of enterprise applications, I'm all in.</p>
-
-                <p>I thrive on collaboration and love being part of the dynamic, ever-evolving tech community on social media. It's where I share, learn, and connect with like-minded folks who are just as excited about the potential of the web as I am.</p>
-
-                <p>But life isn't all code and deploy. When I'm not in front of a computer screen, you'll probably find me exploring new destinations or getting lost in music. Traveling and music aren't just hobbies; they're my sources of inspiration and creativity that I bring back to my work.</p>
-
-                <p>Over the years, I've learned that web development is more than just building websites; it's about crafting experiences that matter, that speak to people. And that's exactly what I aim to do with every line of code I write.</p>
-
-                <p>I'm looking forward to working on our next project together.</p>
-                
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h2 class="section-title mb-3">Innovative Web Solutions</h2>
+                <p class="lead text-muted">Crafting impactful digital experiences with a fresh perspective.</p>
+                <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create web solutions that bridge the gap between user needs and business goals. My approach combines strategic thinking with technical prowess to develop websites and applications that are not only aesthetically pleasing but also functionally robust.</p>
+                <p>My journey in web development is marked by a relentless pursuit of excellence and innovation. Leveraging the latest technologies, I aim to deliver experiences that captivate and engage, ensuring that each project surpasses expectations. My background in business enhances my ability to understand and align with client objectives, providing a unique advantage in the digital landscape.</p>
+                <p>Discover how my services can transform your digital presence. Whether you're looking for a partnership that elevates your online identity or seeking innovative solutions, let's make it happen.</p>
             </div>
         </div>
     </div>
 </section>
+<hr class="section-divider">
 
-<!-- Services Section in home/templates/home/home.html -->
+<!-- Services Section in home.html -->
 <section class="services-section py-5 bg-light">
     <div class="container">
         <header class="mb-5 text-center">
             <h2 class="section-title mb-3">Featured Services</h2>
-            <p class="lead text-muted">A glimpse into the range of web solutions we offer.</p>
+            <p class="lead text-muted">Discover tailored web solutions designed to empower and transform your digital
+                presence.</p>
         </header>
         <div class="row">
             {% for service in services %}
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card service-card mb-4">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ service.title }}</h5>
-                        <p class="card-text">{{ service.home_description }}</p>
-                        <a href="{% url 'service_detail' service.pk %}" class="btn btn-primary">Learn More</a>
+                        <p class="card-text flex-grow-1">{{ service.home_description }}</p>
+                        <a href="{% url 'service_detail' service.pk %}"
+                            class="btn btn-outline-primary mt-2 align-self-start">Read More</a>
                     </div>
                 </div>
             </div>
+
             {% endfor %}
         </div>
     </div>
 </section>
-
-
+<hr class="section-divider">
 
 <!-- Blog Section -->
 <section class="blog-section py-5 bg-light">
