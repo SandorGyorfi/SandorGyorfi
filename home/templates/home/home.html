@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %}Home - Sandor Gyorfi{% endblock %}
-
 {% block content %}
 <!-- Hero Section -->
 <section class="hero-introduction-section py-5 bg-light">
@@ -10,15 +9,23 @@
             <div class="col-lg-12 mx-auto">
                 <h2 class="section-title mb-3">Innovative Web Solutions</h2>
                 <p class="lead text-muted">Crafting impactful digital experiences with a fresh perspective.</p>
-                <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create web solutions that bridge the gap between user needs and business goals. My approach combines strategic thinking with technical prowess to develop websites and applications that are not only aesthetically pleasing but also functionally robust.</p>
-                <p>My journey in web development is marked by a relentless pursuit of excellence and innovation. Leveraging the latest technologies, I aim to deliver experiences that captivate and engage, ensuring that each project surpasses expectations. My background in business enhances my ability to understand and align with client objectives, providing a unique advantage in the digital landscape.</p>
-                <p>Discover how my services can transform your digital presence. Whether you're looking for a partnership that elevates your online identity or seeking innovative solutions, let's make it happen.</p>
+                <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create
+                    web solutions that bridge the gap between user needs and business goals. My approach combines
+                    strategic thinking with technical prowess to develop websites and applications that are not only
+                    aesthetically pleasing but also functionally robust.</p>
+                <p>My journey in web development is marked by a relentless pursuit of excellence and innovation.
+                    Leveraging the latest technologies, I aim to deliver experiences that captivate and engage, ensuring
+                    that each project surpasses expectations. My background in business enhances my ability to
+                    understand and align with client objectives, providing a unique advantage in the digital landscape.
+                </p>
+                <p>Discover how my services can transform your digital presence. Whether you're looking for a
+                    partnership that elevates your online identity or seeking innovative solutions, let's make it
+                    happen.</p>
             </div>
         </div>
     </div>
 </section>
 <hr class="section-divider">
-
 <!-- Services Section in home.html -->
 <section class="services-section py-5 bg-light">
     <div class="container">
@@ -45,7 +52,6 @@
     </div>
 </section>
 <hr class="section-divider">
-
 <!-- Blog Section -->
 <section class="blog-section py-5 bg-light">
     <div class="container">
@@ -56,14 +62,16 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for post in latest_blog_posts %}
             <div class="col">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title }}" loading="lazy">
+                <div class="card mb-4 h-100 shadow-sm border-0">
+                    <a href="{{ post.get_absolute_url }}"><img class="card-img-top"
+                            src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="{{ post.title }}"
+                            loading="lazy"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
+                        <div class="small text-muted">{{ post.created_at|date:"F d, Y" }}</div>
+                        <h2 class="card-title h4">{{ post.title }}</h2>
                         <p class="card-text">{{ post.excerpt }}</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <a href="{{ post.get_absolute_url }}" class="btn btn-outline-primary">Read More</a>
+                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.get_absolute_url }}">Read
+                            more →</a>
                     </div>
                 </div>
             </div>
@@ -76,4 +84,5 @@
         </div>
     </div>
 </section>
+
 {% endblock %}
