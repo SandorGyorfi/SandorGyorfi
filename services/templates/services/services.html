@@ -5,17 +5,18 @@
 {% block content %}
 <section class="services-section py-5 bg-light">
     <div class="container">
-        <header class="section-header text-center mb-5">
-            <h2 class="section-title">My Services</h2>
+        <header class="section-header mb-5">
+            <h4 class="section-title">Services</h4>
             <p class="lead">Building web solutions tailored to your needs.</p>
         </header>
         {% for service in services %}
-            <article class="service-detail mb-5">
+        
+            <article class="service-detail mb-5 py-3">
                 <h3 class="service-title mb-3">{{ service.title }}</h3>
                 <div class="service-short-description">
                     {{ service.short_description|linebreaks }}
                 </div>
-                <a href="{% url 'service_detail' service.pk %}" class="btn btn-primary">Learn More</a>
+                <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-2 align-self-start">Learn More</a>
             </article>
         {% empty %}
             <p class="text-center">I'm currently updating my services to bring you the latest and greatest. Check back soon!</p>

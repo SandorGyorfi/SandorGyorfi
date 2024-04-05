@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Page header with logo and tagline-->
-<header class="py-5 bg-light border-bottom mb-4">
-    <div class="container">
-        <div class="text-center my-5">
-            <h1 class="fw-bolder">Welcome to My Blog!</h1>
-            <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
-        </div>
-    </div>
+<header class="blog-header py-5 border-bottom mb-4">
+  <div class="container">
+      <div class="header-content text-center my-5">
+          <h1 class="fw-bolder">Exploring Technology and Innovation</h1>
+          <p class="lead mb-3">Dive into the latest trends, insights, and discussions at the intersection of technology, business, and creativity.</p>
+      </div>
+  </div>
 </header>
+
+
+
 <!-- Page content-->
 <div class="container">
     <div class="row">
@@ -22,7 +24,7 @@
                     <div class="small text-muted">January 1, 2023</div>
                     <h2 class="card-title">Featured Post Title</h2>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
+                    <a class="btn btn-outline-primary mt-2 align-self-start" href="#!">Read more →</a>
                 </div>
             </div>
             <!-- Nested row for non-featured blog posts-->
@@ -36,7 +38,7 @@
                             <div class="small text-muted">{{ blogpost.created_at|date:"F d, Y" }}</div>
                             <h2 class="card-title h4">{{ blogpost.title }}</h2>
                             <p class="card-text">{{ blogpost.summary }}</p>
-                            <a class="btn btn-primary" href="{{ blogpost.get_absolute_url }}">Read more →</a>
+                            <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ blogpost.get_absolute_url }}">Read more →</a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +68,7 @@
               <div class="card-body">
                   <div class="input-group">
                       <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                      <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                      <button class="btn btn-outline-primary mt-2 align-self-start" id="button-search" type="button">Go!</button>
                   </div>
               </div>
           </div>

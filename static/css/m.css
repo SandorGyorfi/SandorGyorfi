@@ -402,3 +402,20 @@ a:hover, a:focus {
 }
 
 
+.blog-header {
+    background: url('https://example.com/path-to-your-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.header-content {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 15px;
+        border-radius: 5px;
+    }
+}
