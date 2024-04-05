@@ -284,10 +284,18 @@ a:hover, a:focus {
     color: #333;
 }
 
-.fas{
-    color: #00a6ff;
-   font-size: 95%;
+.fas {
+    font-size: 95%;
+    background: -webkit-linear-gradient(90deg, #0029a3, #008ba3 50%, #0029a3);
+    background: linear-gradient(90deg, #0029a3, #008ba3 50%, #0029a3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; 
 }
+
+
+
 
 .section-divider {
     border: 0px;
