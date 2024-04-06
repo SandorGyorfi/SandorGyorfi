@@ -80,7 +80,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1050;
-    display: none; /* Hidden by default */
+    display: none; 
 }
 
 .modal.show {
@@ -146,16 +146,16 @@
 /* Alerts */
 .alert {
     padding: 15px;
-    background-color: #f44336; /* Red */
+    background-color: #f44336; 
     color: white;
     margin-bottom: 15px;
     border-radius: 4px;
     transition: opacity 0.3s ease-in-out;
 }
 
-.alert.success {background-color: #4CAF50;} /* Green */
-.alert.info {background-color: #2196F3;} /* Blue */
-.alert.warning {background-color: #ff9800;} /* Orange */
+.alert.success {background-color: #4CAF50;} 
+.alert.info {background-color: #2196F3;} 
+.alert.warning {background-color: #ff9800;} 
 
 .alert.close {
     margin-left: 15px;
