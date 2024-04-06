@@ -1,7 +1,6 @@
 file_paths = [
     "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\services.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\service_detail.html"
-    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\custom.css",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\service_detail.html",
     "C:\\ServerMini\\www.sandorgyorfi.com\\static\\js\\custom.js",
     "C:\\ServerMini\\www.sandorgyorfi.com\\templates\\base.html",
     "C:\\ServerMini\\www.sandorgyorfi.com\\home\\templates\\home\\home.html",
