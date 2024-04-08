@@ -70,12 +70,19 @@
 }
 
 .navbar-subtitle {
-    font-size: 12px;
-    font-weight: 400;
-    color: #f2f5ff !important;
-    opacity: 0; 
+    white-space: normal; 
+    max-width: 70%; 
+    font-size: 0.7rem; 
+    font-weight: lighter;
+    line-height: 1.3;
     transition: opacity 0.5s ease-in-out;
-}
+    height: auto; 
+    overflow: hidden; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  }
+  
 
 .navbar .container-fluid {
     padding-right: 1rem;
@@ -89,5 +96,13 @@
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+.navbar-toggler {
+    color: none !important;
+    position: absolute;
+    padding: 0.1rem;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 
