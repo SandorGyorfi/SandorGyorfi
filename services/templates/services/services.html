@@ -6,7 +6,7 @@
 <section class="services-section py-5 bg-light">
     <div class="container">
         <header class="section-header mb-5">
-            <h4 class="section-title">Services</h4>
+            <h1 class="section-title">Services</h1>
             <p class="lead">Building web solutions tailored to your needs.</p>
         </header>
         <div class="row">
@@ -18,7 +18,10 @@
                             <div class="service-short-description card-text">
                                 {{ service.short_description|linebreaks }}
                             </div>
-                            <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-auto align-self-start">Learn More</a>
+                            <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-auto align-self-start">
+                                Read More <span class="sr-only">about {{ service.title }}</span>
+                                <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </article>
                 </div>

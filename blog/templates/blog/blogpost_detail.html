@@ -3,106 +3,109 @@
 {% block content %}
 <!-- Page content-->
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Post content-->
-            <article>
-                <!-- Post header-->
-                <header class="mb-4">
-                    <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{ blogpost.title }}</h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on {{ blogpost.created_at|date:"F d, Y" }} by {{ blogpost.author }}</div>
-                    <!-- Post categories-->
-                    {% for category in blogpost.categories.all %}
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#">{{ category.name }}</a>
-                    {% endfor %}
-                </header>
-                <!-- Preview image figure-->
-                <figure class="mb-4">
-                  {% if blogpost.image %}
-                      <img class="img-fluid rounded" src="{{ blogpost.image.url }}" alt="{{ blogpost.title }}" />
-                  {% else %}
-                      <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="default image" />
-                  {% endif %}
-              </figure>
-                <!-- Post content-->
-                <section class="mb-5">
-                    {{ blogpost.content|linebreaks }}
-                </section>
-            </article>
-            <!-- Comments section-->
-            <section class="mb-5">
-              <div class="card bg-light">
-                  <div class="card-body">
-                      <!-- Comment form-->
-                      <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                      <!-- Comment with nested comments-->
-                      <div class="d-flex mb-4">
-                          <!-- Parent comment-->
-                          <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                          <div class="ms-3">
-                              <div class="fw-bold">Commenter Name</div>
-                              If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                              <!-- Child comment 1-->
-                              <div class="d-flex mt-4">
-                                  <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                  <div class="ms-3">
-                                      <div class="fw-bold">Commenter Name</div>
-                                      And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                  </div>
-                              </div>
-                              <!-- Child comment 2-->
-                              <div class="d-flex mt-4">
-                                  <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                  <div class="ms-3">
-                                      <div class="fw-bold">Commenter Name</div>
-                                      When you put money directly to a problem, it makes a good headline.
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Single comment-->
-                      <div class="d-flex">
-                          <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                          <div class="ms-3">
-                              <div class="fw-bold">Commenter Name</div>
-                              When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                          </div>
-                      </div>
-                  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Post content-->
+      <article>
+        <!-- Post header-->
+        <header class="mb-4">
+          <!-- Post title-->
+          <h1 class="fw-bolder mb-1">{{ blogpost.title }}</h1>
+          <!-- Post meta content-->
+          <div class="text-muted fst-italic mb-2">Posted on <time datetime="{{ blogpost.created_at|date:" Y-m-d" }}">{{
+              blogpost.created_at|date:"F d, Y" }}</time> by {{ blogpost.author }}</div>
+          <!-- Post categories-->
+          <div>
+            {% for category in blogpost.categories.all %}
+            <a class="badge bg-secondary text-decoration-none link-light" href="#"
+              aria-label="Category: {{ category.name }}">{{ category.name }}</a>
+            {% endfor %}
+          </div>
+        </header>
+        <!-- Preview image figure-->
+        <figure class="mb-4">
+          {% if blogpost.image %}
+          <img class="img-fluid rounded" src="{{ blogpost.image.url }}" alt="{{ blogpost.title }}" />
+          {% else %}
+          <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+            alt="default image for {{ blogpost.title }}" />
+          {% endif %}
+        </figure>
+        <!-- Post content-->
+        <section class="mb-5">
+          {{ blogpost.content|linebreaks }}
+        </section>
+      </article>
+      <!-- Comments Section -->
+      <section aria-labelledby="comments-section-title">
+        <div class="container my-5">
+          <h4 id="comments-section-title" class="text-center mb-4">Comments Section</h4>
+          {% for comment in comments %}
+          <article class="d-flex flex-start mt-4">
+            <img class="rounded-circle shadow-1-strong me-3" src="{{ comment.author.profile_picture.url }}"
+              alt="Profile picture of {{ comment.author.get_full_name }}" width="65" height="65" />
+            <div class="flex-grow-1 flex-shrink-1">
+              <div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="mb-1">
+                    {{ comment.author.get_full_name }} <span class="small text-muted">- {{ comment.created_on|timesince
+                      }} ago</span>
+                  </p>
+                  <a href="#!" class="small">Reply</a>
+                </div>
+                <p class="small mb-0">{{ comment.body }}</p>
               </div>
-          </section>
+              {% for reply in comment.replies.all %}
+              <div class="d-flex flex-start mt-4 ms-5">
+                <img class="rounded-circle shadow-1-strong me-3" src="{{ reply.author.profile_picture.url }}"
+                  alt="Profile picture of {{ reply.author.get_full_name }}" width="50" height="50" />
+                <div class="flex-grow-1 flex-shrink-1">
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="mb-1">
+                        {{ reply.author.get_full_name }} <span class="small text-muted">- {{ reply.created_on|timesince
+                          }} ago</span>
+                      </p>
+                    </div>
+                    <p class="small mb-0">{{ reply.body }}</p>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </article>
+          {% endfor %}
         </div>
-        <!-- Side widgets-->
-        <div class="col-lg-4">
-          <!-- Search widget-->
-          <div class="card mb-3">
-              <div class="card-header">Search</div>
-              <div class="card-body">
-                  <div class="input-group">
-                      <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                      <button class="btn btn-outline-primary mt-2 align-self-start" id="button-search" type="button">Go!</button>
-                  </div>
-              </div>
-          </div>
-            <!-- Categories widget-->
-<div class="card mb-4">
-  <div class="card-header">Categories</div>
-  <div class="card-body">
-      <div class="row">
-          <div class="col">
-              <ul class="list-unstyled mb-0">
-                  {% for category in categories %}
-                      <li><a href="{{ blogpost.get_absolute_url }}">{{ category.name }}</a></li>
-                  {% endfor %}
-              </ul>
-          </div>
-      </div>
-  </div>
-</div>
-
-
+      </section>
     </div>
-</div>
-{% endblock %}
+    <!-- Side widgets-->
+    <div class="col-lg-4">
+      <!-- Search widget-->
+      <div class="card mb-3">
+        <div class="card-header">Search</div>
+        <div class="card-body">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..."
+              aria-describedby="button-search" />
+            <button class="btn btn-outline-primary mt-2 align-self-start" id="button-search" type="button">Go!</button>
+          </div>
+        </div>
+      </div>
+      <!-- Categories widget-->
+      <div class="card mb-4">
+        <div class="card-header">Categories</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <ul class="list-unstyled mb-0">
+                {% for category in categories %}
+                <li><a href="{{ blogpost.get_absolute_url }}">{{ category.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

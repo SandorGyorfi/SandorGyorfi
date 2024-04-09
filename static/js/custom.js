@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded and parsed");
 
   // Cycle through section titles for dynamic navbar subtitle
-  const sectionTitles = document.querySelectorAll("h2, h3");
+  const sectionTitles = document.querySelectorAll("h1, h2, h3, h4");
   const navbarTitle = document.getElementById("navbar-title");
   const navbarSubtitle = document.getElementById("navbar-subtitle");
   let currentTitleIndex = 0;
@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
           sectionTitles[currentTitleIndex].textContent;
         navbarSubtitle.style.opacity = 1;
         currentTitleIndex = (currentTitleIndex + 1) % sectionTitles.length;
-      }, 500);
+      }, 1500);
     }
   }
 
   cycleSectionTitles();
-  setInterval(cycleSectionTitles, 4000);
+  setInterval(cycleSectionTitles, 8000);
 
   const pathname = window.location.pathname;
   const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
@@ -103,5 +103,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
 

@@ -48,6 +48,12 @@
         padding: 1rem 0;
     }
 
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(52, 58, 64, 0.5);
+    }
+
     .footer-logo, .footer-text {
         margin-bottom: 0.5rem;
     }

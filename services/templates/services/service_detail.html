@@ -5,12 +5,12 @@
 {% block content %}
 <section class="service-detail-section py-5">
     <div class="container">
-        <h2 class="service-title mb-3">{{ service.title }}</h2>
+        <h1 class="service-title mb-3">{{ service.title }}</h1>
         <div class="service-description">
             {{ service.description|linebreaks }}
         </div>
         {% if service.link %}
-            <a href="{{ service.link }}" class="btn btn-outline-primary mt-2 align-self-start">Visit Link</a>
+            <a href="{{ service.link }}" class="btn btn-outline-primary mt-2 align-self-start" aria-label="Visit {{ service.title }} link">Visit Link</a>
         {% endif %}
     </div>
 </section>

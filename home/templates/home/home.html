@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mx-auto">
-                <h2 class="section-title mb-3">Innovative Web Solutions</h2>
+                <h1 class="section-title mb-3">Innovative Web Solutions</h1>
                 <p class="lead text-muted">Crafting impactful digital experiences with a fresh perspective.</p>
                 <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create
                     web solutions that bridge the gap between user needs and business goals. My approach combines
@@ -39,14 +39,15 @@
             <div class="col-md-4 d-flex align-items-stretch">
                 <div class="card service-card mb-4">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ service.title }}</h5>
+                        <h3 class="card-title">{{ service.title }}</h3>
                         <p class="card-text flex-grow-1">{{ service.home_description }}</p>
-                        <a href="{% url 'service_detail' service.pk %}"
-                            class="btn btn-outline-primary mt-2 align-self-start">Read More</a>
+                        <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-2 align-self-start">
+                            Read More <span class="sr-only">about {{ service.title }}</span>
+                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-
             {% endfor %}
         </div>
     </div>
@@ -63,15 +64,17 @@
             {% for post in latest_blog_posts %}
             <div class="col">
                 <div class="card mb-4 h-100 shadow-sm border-0">
-                    <a href="{{ blogpost.get_absolute_url }}"><img class="card-img-top"
-                            src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="{{ post.title }}"
-                            loading="lazy"></a>
+                    <a href="{{ post.get_absolute_url }}">
+                        <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="{{ post.title }}" loading="lazy">
+                    </a>
                     <div class="card-body">
                         <div class="small text-muted">{{ post.created_at|date:"F d, Y" }}</div>
-                        <h2 class="card-title h4">{{ post.title }}</h2>
+                        <h3 class="card-title h4">{{ post.title }}</h3>
                         <p class="card-text">{{ post.excerpt }}</p>
-                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.get_absolute_url }}">Read
-                            more →</a>
+                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.get_absolute_url }}">
+                            Read more <span class="sr-only">about {{ post.title }}</span>
+                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
