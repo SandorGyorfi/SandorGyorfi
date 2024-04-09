@@ -11,9 +11,14 @@
         <header class="mb-4">
           <!-- Post title-->
           <h1 class="fw-bolder mb-1">{{ blogpost.title }}</h1>
+          <!-- Post slug-->
+          <h2 class="fw-light mb-1">{{ blogpost.slug }}</h2>
           <!-- Post meta content-->
-          <div class="text-muted fst-italic mb-2">Posted on <time datetime="{{ blogpost.created_at|date:" Y-m-d" }}">{{
-              blogpost.created_at|date:"F d, Y" }}</time> by {{ blogpost.author }}</div>
+          <div class="text-muted fst-italic mb-2">Posted on <time datetime="{{ blogpost.created_at|date:'Y-m-d' }}">{{
+              blogpost.created_at|date:'F d, Y' }}</time> by {{ blogpost.author.username }}</div>
+          <!-- Post updated at-->
+          <div class="text-muted fst-italic mb-2">Last updated on <time
+              datetime="{{ blogpost.updated_at|date:'Y-m-d' }}">{{ blogpost.updated_at|date:'F d, Y' }}</time></div>
           <!-- Post categories-->
           <div>
             {% for category in blogpost.categories.all %}
@@ -37,42 +42,30 @@
         </section>
       </article>
       <!-- Comments Section -->
-      <section aria-labelledby="comments-section-title">
+      <section class="comments-section text-white py-4" aria-labelledby="comments-section-title">
         <div class="container my-5">
           <h4 id="comments-section-title" class="text-center mb-4">Comments Section</h4>
           {% for comment in comments %}
-          <article class="d-flex flex-start mt-4">
-            <img class="rounded-circle shadow-1-strong me-3" src="{{ comment.author.profile_picture.url }}"
-              alt="Profile picture of {{ comment.author.get_full_name }}" width="65" height="65" />
-            <div class="flex-grow-1 flex-shrink-1">
-              <div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="mb-1">
-                    {{ comment.author.get_full_name }} <span class="small text-muted">- {{ comment.created_on|timesince
-                      }} ago</span>
-                  </p>
-                  <a href="#!" class="small">Reply</a>
-                </div>
-                <p class="small mb-0">{{ comment.body }}</p>
-              </div>
+          <article class="comment">
+            <div class="comment-header">
+              <i class="fa fa-user comment-icon"></i>
+              <strong class="comment-author">{{ comment.author.username }}</strong>
+              <span class="comment-date">{{ comment.created_on|timesince }} ago</span>
+            </div>
+            <p class="comment-body">{{ comment.body }}</p>
+            <a href="#!" class="comment-reply-link" aria-label="Reply to {{ comment.author.username }}">Reply</a>
+            <section class="comment-replies">
               {% for reply in comment.replies.all %}
-              <div class="d-flex flex-start mt-4 ms-5">
-                <img class="rounded-circle shadow-1-strong me-3" src="{{ reply.author.profile_picture.url }}"
-                  alt="Profile picture of {{ reply.author.get_full_name }}" width="50" height="50" />
-                <div class="flex-grow-1 flex-shrink-1">
-                  <div>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <p class="mb-1">
-                        {{ reply.author.get_full_name }} <span class="small text-muted">- {{ reply.created_on|timesince
-                          }} ago</span>
-                      </p>
-                    </div>
-                    <p class="small mb-0">{{ reply.body }}</p>
-                  </div>
+              <div class="comment-reply">
+                <div class="comment-header">
+                  <i class="fa fa-reply comment-icon"></i>
+                  <strong class="comment-author">{{ reply.author.username }}</strong>
+                  <span class="comment-date">{{ reply.created_on|timesince }} ago</span>
                 </div>
+                <p class="comment-body">{{ reply.body }}</p>
               </div>
               {% endfor %}
-            </div>
+            </section>
           </article>
           {% endfor %}
         </div>
@@ -99,7 +92,7 @@
             <div class="col">
               <ul class="list-unstyled mb-0">
                 {% for category in categories %}
-                <li><a href="{{ blogpost.get_absolute_url }}">{{ category.name }}</a></li>
+                <li><a href="{{ post.get_absolute_url }}">{{ category.name }}</a></li>
                 {% endfor %}
               </ul>
             </div>

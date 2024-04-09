@@ -10,13 +10,9 @@
     transition: color 0.3s ease;
 }
 
-.navbar-brand:hover {
-    color: #007bff !important;
-}
-
 .navbar-nav .nav-link {
     color: #f2f5ff !important;
-    margin-right: 1rem;
+    margin-right: 0.1rem;
     transition: color 0.3s ease;
 }
 
