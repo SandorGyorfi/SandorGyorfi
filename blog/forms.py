@@ -1,15 +1,12 @@
-from django import forms
-from .models import Comment
 
-class CommentForm(forms.ModelForm):
-    """Form for submitting a comment on a blog post."""
-    
-    class Meta:
-        model = Comment
-        fields = ['body']
-        widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': '3', 'placeholder': 'Enter your comment here...'}),
-        }
-        labels = {
-            'body': 'Comment',
-        }
+from django import forms
+from .models import PollOption
+
+class PollResponseForm(forms.Form):
+    option = forms.ModelChoiceField(queryset=PollOption.objects.none(), widget=forms.RadioSelect, empty_label=None)
+
+    def __init__(self, *args, **kwargs):
+        poll_id = kwargs.pop('poll_id', None)
+        super().__init__(*args, **kwargs)
+        if poll_id is not None:
+            self.fields['option'].queryset = PollOption.objects.filter(poll_id=poll_id)

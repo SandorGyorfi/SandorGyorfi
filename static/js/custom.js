@@ -104,3 +104,61 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOM fully loaded and parsed");
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  const csrftoken = getCookie('csrftoken');
+
+  const voteForm = document.querySelector('form.poll-voting-section');
+  if (voteForm) {
+    voteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(voteForm);
+
+      fetch(voteForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRFToken': csrftoken
+        },
+        credentials: 'same-origin'
+      })
+      .then(response => response.json())
+      .then(data => {
+        data.pollOptions.forEach(option => {
+          const bar = document.querySelector(`.progress-bar[data-option-id="${option.id}"]`);
+          if (bar) {
+            bar.style.width = `${option.percentage}%`;
+            bar.setAttribute('aria-valuenow', option.percentage);
+
+            const percentageDisplay = bar.parentNode.querySelector('.percentage-display');
+            if (percentageDisplay) {
+              percentageDisplay.textContent = `${option.percentage}%`;
+            }
+          }
+        });
+      })
+      .catch(error => console.error('Error submitting vote:', error));
+    });
+  }
+
+  document.querySelectorAll('.progress-bar').forEach(function (bar) {
+    const percentage = bar.getAttribute('data-percentage');
+    bar.style.width = `${percentage}%`;
+  });
+});

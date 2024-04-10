@@ -2,11 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
+from .models import BlogPost, PollOption
+from django.http import JsonResponse
 
-from .forms import CommentForm
-from .models import BlogPost, Category, Comment
+
+
+from .forms import PollResponseForm
+from .models import BlogPost, Category, Poll, PollOption
 
 class BlogPostListView(ListView):
     """Displays a list of Blog Posts ordered by creation date."""
@@ -26,38 +29,46 @@ class BlogPostListView(ListView):
         return context
 
 class BlogPostDetailView(DetailView):
-    """Displays a single Blog Post detail, along with comments and a form for new comments."""
     model = BlogPost
     template_name = 'blog/blogpost_detail.html'
 
     def get_context_data(self, **kwargs):
-        """Add comments and a comment form to the context."""
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.filter(parent__isnull=True)
-        context['comment_form'] = CommentForm()
+        poll = Poll.objects.filter(blog_post=self.object).first()
+        if poll:
+            context['poll_form'] = PollResponseForm(poll_id=poll.id)
         return context
 
     def post(self, request, *args, **kwargs):
-        """Handle POST requests to save a new comment."""
         self.object = self.get_object()
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            comment.post = self.object
-            if 'parent_id' in request.POST:
-                comment.parent_id = request.POST.get('parent_id')
-            comment.save()
-            return HttpResponseRedirect(self.object.get_absolute_url())
-        return self.get(request, *args, **kwargs)
+        poll = Poll.objects.filter(blog_post=self.object).first()
+        if poll:
+            form = PollResponseForm(request.POST, poll_id=poll.id)
+            if form.is_valid():
+                selected_option = form.cleaned_data['option']
+                selected_option.votes += 1
+                selected_option.save()
+                return redirect('blog:blog_detail', pk=self.object.pk)
+        return super().get(request, *args, **kwargs)
+    
+def submit_vote(request, pk):
+    if request.method == 'POST':
+        blog_post = get_object_or_404(BlogPost, pk=pk)
+        option_id = request.POST.get('option')
+        selected_option = get_object_or_404(PollOption, id=option_id)
+        
+        selected_option.votes += 1
+        selected_option.save()
 
-@method_decorator(login_required, name='dispatch')
-def post_reply(request, blogpost_id):
-    """Handle POST requests to save a reply to a comment."""
-    blogpost = get_object_or_404(BlogPost, pk=blogpost_id)
-    if request.method == "POST":
-        body = request.POST.get('reply_body')
-        parent_id = request.POST.get('parent_id')
-        parent_comment = get_object_or_404(Comment, pk=parent_id)
-        Comment.objects.create(post=blogpost, author=request.user, body=body, parent=parent_comment)
-    return redirect(blogpost.get_absolute_url())
+        poll_options = blog_post.poll.options.all()
+        data = {
+            'pollOptions': [{
+                'id': option.id,
+                'percentage': (option.votes / sum(o.votes for o in poll_options) * 100) if poll_options else 0
+            } for option in poll_options]
+        }
+
+        return JsonResponse(data)
+
+    # Handle non-POST requests or other error cases
+    return JsonResponse({'error': 'Invalid request'}, status=400)    

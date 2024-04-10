@@ -41,35 +41,57 @@
           {{ blogpost.content|linebreaks }}
         </section>
       </article>
-      <!-- Comments Section -->
-      <section class="comments-section text-white py-4" aria-labelledby="comments-section-title">
-        <div class="container my-5">
-          <h4 id="comments-section-title" class="text-center mb-4">Comments Section</h4>
-          {% for comment in comments %}
-          <article class="comment">
-            <div class="comment-header">
-              <i class="fa fa-user comment-icon"></i>
-              <strong class="comment-author">{{ comment.author.username }}</strong>
-              <span class="comment-date">{{ comment.created_on|timesince }} ago</span>
+
+      <!-- Poll Voting Section -->
+      {% if poll %}
+      <section class="poll-voting-section bg-light py-4 my-4">
+        <div class="container">
+          <h4 class="text-center mb-4">Cast Your Vote</h4>
+          <form method="post" action="{% url 'blog:submit_vote' blogpost.pk %}">
+            {% csrf_token %}
+            {% for option in poll.options.all %}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="option" id="option{{ option.id }}"
+                value="{{ option.id }}">
+              <label class="form-check-label" for="option{{ option.id }}">
+                {{ option.option_text }}
+              </label>
             </div>
-            <p class="comment-body">{{ comment.body }}</p>
-            <a href="#!" class="comment-reply-link" aria-label="Reply to {{ comment.author.username }}">Reply</a>
-            <section class="comment-replies">
-              {% for reply in comment.replies.all %}
-              <div class="comment-reply">
-                <div class="comment-header">
-                  <i class="fa fa-reply comment-icon"></i>
-                  <strong class="comment-author">{{ reply.author.username }}</strong>
-                  <span class="comment-date">{{ reply.created_on|timesince }} ago</span>
-                </div>
-                <p class="comment-body">{{ reply.body }}</p>
-              </div>
-              {% endfor %}
-            </section>
-          </article>
-          {% endfor %}
+            {% endfor %}
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Vote</button>
+            </div>
+          </form>
         </div>
       </section>
+      {% endif %}
+
+      <!-- Poll Results Section -->
+<section class="poll-results-section bg-light py-4" aria-labelledby="poll-results-section-title">
+  <div class="container my-5">
+    <h4 id="poll-results-section-title" class="text-center mb-4">Poll Results</h4>
+    {% if poll and poll.options.all %}
+      <div class="poll-question mb-3">
+        <strong>Question:</strong> {{ poll.question }}
+      </div>
+      {% for option in poll.options.all %}
+        <div class="poll-option mb-2">
+          <div class="d-flex justify-content-between">
+            <strong>{{ option.option_text }}</strong>
+            <span>{{ option.votes }} votes</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ option.percentage|default:'0' }}" aria-valuemin="0" aria-valuemax="100" data-percentage="{{ option.percentage|default:'0' }}" data-option-id="{{ option.id }}"></div>
+          </div>
+          <span class="ms-2">{{ option.percentage|default:'0' }}%</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center">No poll available for this post.</p>
+    {% endif %}
+  </div>
+</section>
+
     </div>
     <!-- Side widgets-->
     <div class="col-lg-4">

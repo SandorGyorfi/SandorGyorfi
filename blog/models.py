@@ -2,6 +2,12 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
 
 class Category(models.Model):
     """Represents a category for blog posts."""
@@ -18,7 +24,7 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     categories = models.ManyToManyField(Category, related_name='blog_posts')
 
     def __str__(self):
@@ -32,16 +38,28 @@ class BlogPost(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-class Comment(models.Model):
-    """Represents a comment on a blog post."""
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
-
-    class Meta:
-        ordering = ['created_on']
+class Poll(models.Model):
+    blog_post = models.OneToOneField(BlogPost, on_delete=models.CASCADE, related_name='poll')
+    question = models.CharField(max_length=255, default='How do you rate this post?')
 
     def __str__(self):
-        return f'Comment by {self.author}'
+        return f'Poll for {self.blog_post.title}'
+
+class PollOption(models.Model):
+    poll = models.ForeignKey(Poll, related_name='options', on_delete=models.CASCADE)
+    option_text = models.CharField(max_length=100)
+    votes = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.option_text
+
+class Vote(models.Model):
+    poll_option = models.ForeignKey(PollOption, related_name='vote_set', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.poll_option.option_text}'
+
+    class Meta:
+        unique_together = ('poll_option', 'user',)
