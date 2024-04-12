@@ -33,20 +33,17 @@ class BlogPostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        blogpost = context.get('blogpost')
         context['choices'] = ['needs_work', 'meh', 'interesting', 'game_changer']
         context['vote_form'] = BlogPostVoteForm()
-        return context
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = BlogPostVoteForm(request.POST)
-        if form.is_valid():
-            vote_type = form.cleaned_data['vote']
-            if vote_type in self.get_context_data()['choices']:
-                setattr(self.object, f'{vote_type}_votes', getattr(self.object, f'{vote_type}_votes') + 1)
-                self.object.save()
-                return redirect('blog:blog_detail', pk=self.object.pk)
-        return super().get(request, *args, **kwargs)
+        total_votes = sum(getattr(blogpost, f"{choice}_votes") for choice in context['choices'])
+        context['vote_percentages'] = {
+            choice: (getattr(blogpost, f"{choice}_votes") / total_votes * 100 if total_votes > 0 else 0)
+            for choice in context['choices']
+        }
+
+        return context
 
 
 @require_POST
