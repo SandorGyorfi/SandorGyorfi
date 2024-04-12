@@ -6,6 +6,7 @@ file_paths = [
     "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\models.py",
     "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\urls.py",
     "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\views.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templatetags\\blog_extras.py",
     "C:\\ServerMini\\www.sandorgyorfi.com\\templates\\base.html",
     "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_list.html",
     "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_detail.html"

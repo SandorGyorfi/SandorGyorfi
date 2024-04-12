@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Object.entries(percentages).forEach(([key, value]) => {
         const percentSpan = document.getElementById(`vote_${key}_percent`);
         if (percentSpan) {
-            percentSpan.textContent = `${value.toFixed(1)}%`;
+            percentSpan.textContent = `${parseFloat(value).toFixed(1)}%`;
         }
     });
     showFeedback("Thanks for your feedback!");

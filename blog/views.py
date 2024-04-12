@@ -34,16 +34,25 @@ class BlogPostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         blogpost = context.get('blogpost')
-        context['choices'] = ['needs_work', 'meh', 'interesting', 'game_changer']
+
+        friendly_names = {
+            'needs_work': 'Needs Work',
+            'meh': 'Meeeh',
+            'interesting': 'Interesting',
+            'game_changer': 'Game Changer'
+        }
+        
+        context['choices'] = friendly_names  
         context['vote_form'] = BlogPostVoteForm()
 
-        total_votes = sum(getattr(blogpost, f"{choice}_votes") for choice in context['choices'])
+        total_votes = sum(getattr(blogpost, f"{choice}_votes") for choice in friendly_names)
         context['vote_percentages'] = {
             choice: (getattr(blogpost, f"{choice}_votes") / total_votes * 100 if total_votes > 0 else 0)
-            for choice in context['choices']
+            for choice in friendly_names 
         }
 
         return context
+
 
 
 @require_POST
