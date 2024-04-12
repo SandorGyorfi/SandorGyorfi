@@ -1,32 +1,31 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
-from .models import BlogPost, PollOption
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.views.generic import ListView, DetailView
+from django.urls import reverse
+from django.views.decorators.http import require_POST
+from.models import BlogPost, Category
+from.forms import BlogPostVoteForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+import json
 
 
-
-from .forms import PollResponseForm
-from .models import BlogPost, Category, Poll, PollOption
 
 class BlogPostListView(ListView):
-    """Displays a list of Blog Posts ordered by creation date."""
     model = BlogPost
     template_name = 'blog/blogpost_list.html'
     context_object_name = 'blogposts'
     paginate_by = 3
 
     def get_queryset(self):
-        """Return Blog Posts ordered by creation date."""
         return super().get_queryset().order_by('-created_at')
 
     def get_context_data(self, **kwargs):
-        """Add categories to the context."""
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
+        context['vote_form'] = BlogPostVoteForm()
+        context['choices'] = ['needs_work', 'meh', 'interesting', 'game_changer']
         return context
+
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
@@ -34,41 +33,55 @@ class BlogPostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        poll = Poll.objects.filter(blog_post=self.object).first()
-        if poll:
-            context['poll_form'] = PollResponseForm(poll_id=poll.id)
+        context['choices'] = ['needs_work', 'meh', 'interesting', 'game_changer']
+        context['vote_form'] = BlogPostVoteForm()
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        poll = Poll.objects.filter(blog_post=self.object).first()
-        if poll:
-            form = PollResponseForm(request.POST, poll_id=poll.id)
-            if form.is_valid():
-                selected_option = form.cleaned_data['option']
-                selected_option.votes += 1
-                selected_option.save()
+        form = BlogPostVoteForm(request.POST)
+        if form.is_valid():
+            vote_type = form.cleaned_data['vote']
+            if vote_type in self.get_context_data()['choices']:
+                setattr(self.object, f'{vote_type}_votes', getattr(self.object, f'{vote_type}_votes') + 1)
+                self.object.save()
                 return redirect('blog:blog_detail', pk=self.object.pk)
         return super().get(request, *args, **kwargs)
-    
-def submit_vote(request, pk):
-    if request.method == 'POST':
-        blog_post = get_object_or_404(BlogPost, pk=pk)
-        option_id = request.POST.get('option')
-        selected_option = get_object_or_404(PollOption, id=option_id)
-        
-        selected_option.votes += 1
-        selected_option.save()
 
-        poll_options = blog_post.poll.options.all()
-        data = {
-            'pollOptions': [{
-                'id': option.id,
-                'percentage': (option.votes / sum(o.votes for o in poll_options) * 100) if poll_options else 0
-            } for option in poll_options]
+
+@require_POST
+def submit_vote(request, pk):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'Authentication required'}, status=403)
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+    try:
+        friendly_to_system = {
+            'needs_work': 'needs_work',
+            'meh': 'meh',
+            'interesting': 'interesting',
+            'game_changer': 'game_changer'
         }
 
-        return JsonResponse(data)
+        vote_type = data.get('vote')
+        system_vote_type = friendly_to_system.get(vote_type)
 
-    # Handle non-POST requests or other error cases
-    return JsonResponse({'error': 'Invalid request'}, status=400)    
+        if system_vote_type is None:
+            return JsonResponse({'error': 'Invalid vote type'}, status=400)
+
+        blog_post = get_object_or_404(BlogPost, pk=pk)
+        current_votes = getattr(blog_post, f'{system_vote_type}_votes', 0)
+        setattr(blog_post, f'{system_vote_type}_votes', current_votes + 1)
+        blog_post.save()
+
+        vote_counts = {choice: getattr(blog_post, f'{choice}_votes') for choice in friendly_to_system.values()}
+        total_votes = sum(vote_counts.values())
+        percentages = {k: (v / total_votes * 100 if total_votes > 0 else 0) for k, v in vote_counts.items()}
+
+        return JsonResponse({'success': True, 'percentages': percentages})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

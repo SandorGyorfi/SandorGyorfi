@@ -7,8 +7,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-
-
 class Category(models.Model):
     """Represents a category for blog posts."""
     name = models.CharField(max_length=100)
@@ -27,6 +25,12 @@ class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     categories = models.ManyToManyField(Category, related_name='blog_posts')
 
+    # Vote counters for each category
+    needs_work_votes = models.PositiveIntegerField(default=0)
+    meh_votes = models.PositiveIntegerField(default=0)
+    interesting_votes = models.PositiveIntegerField(default=0)
+    game_changer_votes = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.title
 
@@ -37,29 +41,3 @@ class BlogPost(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-
-class Poll(models.Model):
-    blog_post = models.OneToOneField(BlogPost, on_delete=models.CASCADE, related_name='poll')
-    question = models.CharField(max_length=255, default='How do you rate this post?')
-
-    def __str__(self):
-        return f'Poll for {self.blog_post.title}'
-
-class PollOption(models.Model):
-    poll = models.ForeignKey(Poll, related_name='options', on_delete=models.CASCADE)
-    option_text = models.CharField(max_length=100)
-    votes = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return self.option_text
-
-class Vote(models.Model):
-    poll_option = models.ForeignKey(PollOption, related_name='vote_set', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.user.username} - {self.poll_option.option_text}'
-
-    class Meta:
-        unique_together = ('poll_option', 'user',)

@@ -104,61 +104,91 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  console.log("DOM fully loaded and parsed");
+// Vote button functionality
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM fully loaded and script started");
 
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
+  function getCsrfToken() {
+    let csrfToken = "";
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      let [name, value] = cookie.trim().split("=");
+      if (name === "csrftoken") {
+        csrfToken = value;
+        break;
       }
     }
-    return cookieValue;
+    return csrfToken;
   }
 
-  const csrftoken = getCookie('csrftoken');
+  const voteButtons = document.querySelectorAll(".vote-button");
+  console.log("Vote buttons found:", voteButtons.length);
 
-  const voteForm = document.querySelector('form.poll-voting-section');
-  if (voteForm) {
-    voteForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(voteForm);
-
-      fetch(voteForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRFToken': csrftoken
-        },
-        credentials: 'same-origin'
-      })
-      .then(response => response.json())
-      .then(data => {
-        data.pollOptions.forEach(option => {
-          const bar = document.querySelector(`.progress-bar[data-option-id="${option.id}"]`);
-          if (bar) {
-            bar.style.width = `${option.percentage}%`;
-            bar.setAttribute('aria-valuenow', option.percentage);
-
-            const percentageDisplay = bar.parentNode.querySelector('.percentage-display');
-            if (percentageDisplay) {
-              percentageDisplay.textContent = `${option.percentage}%`;
-            }
-          }
-        });
-      })
-      .catch(error => console.error('Error submitting vote:', error));
+  voteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const voteType = this.dataset.voteType;
+      const postId = this.dataset.postId;
+      console.log(
+        "Button clicked for vote type:",
+        voteType,
+        "on post:",
+        postId
+      );
+      submitVote(voteType, postId);
     });
+  });
+
+  function submitVote(voteType, postId) {
+    const csrfToken = getCsrfToken();
+    console.log("Submitting vote with CSRF Token:", csrfToken);
+
+    fetch(`/blog/post/${postId}/vote/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
+      },
+      body: JSON.stringify({ vote: voteType }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Received response:", data);
+        if (data.success) {
+          updateVoteResults(data.percentages);
+        } else {
+          console.error("Error submitting vote:", data.error);
+        }
+      })
+      .catch((error) => {
+        console.error("Error submitting vote:", error);
+      });
   }
 
-  document.querySelectorAll('.progress-bar').forEach(function (bar) {
-    const percentage = bar.getAttribute('data-percentage');
-    bar.style.width = `${percentage}%`;
-  });
+  function updateVoteResults(percentages) {
+    Object.entries(percentages).forEach(([key, value]) => {
+        const percentSpan = document.getElementById(`vote_${key}_percent`);
+        if (percentSpan) {
+            percentSpan.textContent = `${value.toFixed(1)}%`;
+        }
+    });
+    showFeedback("Thanks for your feedback!");
+  }
+
+  function showFeedback(message) {
+    const feedbackElement = document.getElementById("vote-feedback");
+    if (feedbackElement) {
+        feedbackElement.textContent = message;
+        feedbackElement.classList.add("show");
+
+        setTimeout(() => {
+            feedbackElement.classList.remove("show");
+        }, 4000);
+    }
+  }
+
 });
