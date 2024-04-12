@@ -15,8 +15,8 @@
           <!-- Post slug-->
           <h2 class="fw-light mb-1">{{ blogpost.slug }}</h2>
           <!-- Post meta content-->
-          <div class="text-muted fst-italic mb-2">Posted on <time datetime="{{ blogpost.created_at|date:'Y-m-d' }}">{{
-              blogpost.created_at|date:'F d, Y' }}</time> by {{ blogpost.author.username }}</div>
+          <div class="text-muted fst-italic mb-2">Posted on {{ blogpost.created_at|date:'F d, Y' }} by {{ blogpost.author.username }}
+          </div>
           <!-- Post updated at-->
           <div class="text-muted fst-italic mb-2">Last updated on <time
               datetime="{{ blogpost.updated_at|date:'Y-m-d' }}">{{ blogpost.updated_at|date:'F d, Y' }}</time></div>
@@ -40,7 +40,26 @@
         <!-- Post content-->
         <section class="mb-5">
           {{ blogpost.content|linebreaks }}
+          <div class="social-discussion-buttons text-center mt-4">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" class="btn btn-outline-primary mt-2 align-self-start" target="_blank">
+                 Discuss on LinkedIn <i class="fab fa-linkedin"></i>
+            </a>
+            
+            <!-- X -->
+            <a href="https://x.com/intent/tweet?text=Check out this blog post&url={{ request.build_absolute_uri }}" class="btn btn-outline-primary mt-2 align-self-start" target="_blank">
+                 Discuss on X <i class="fab fa-twitter"></i>
+            </a>
+        
+            <!-- GitHub, if applicable -->
+            <a href="https://github.com/your-repo/your-project/issues/new?title=Discussion about {{ blogpost.title|urlencode }}" class="btn btn-outline-primary mt-2 align-self-start" target="_blank">
+                 Discuss on GitHub <i class="fab fa-github"></i>
+            </a>
+        </div>
+        
         </section>
+      
+      
       </article>
       <!-- Poll Voting Section -->
       <section class="poll-voting-section bg-light py-4 my-4">
