@@ -2,56 +2,59 @@
 {% load static %}
 
 <html lang="en">
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RETHLPZ6G"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-7RETHLPZ6G');
-        </script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome to www.sandorgyorfi.com{% endblock %}</title>
-    
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-        <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
-        <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
-        <!-- Update CSS links to reflect the new organization -->
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'css/components.css' %}">
-        <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
-        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-        <style>
-            #cookieConsentBanner {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                background-color: #343a40;
-                color: #ffffff;
-                padding: 1rem;
-                text-align: center;
-                display: none;
-                z-index: 1050;
-            }
-            #acceptCookies {
-                background-color: #007bff;
-                border-color: #007bff;
-                padding: .375rem .75rem;
-                border-radius: .25rem;
-                color: #fff;
-                font-size: 1rem;
-                line-height: 1.5;
-            }
-            #acceptCookies:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-        </style>
-    </head>
-    
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RETHLPZ6G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-7RETHLPZ6G');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome to www.sandorgyorfi.com{% endblock %}</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <!-- Update CSS links to reflect the new organization -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        #cookieConsentBanner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+            display: none;
+            z-index: 1050;
+        }
+
+        #acceptCookies {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: .375rem .75rem;
+            border-radius: .25rem;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        #acceptCookies:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+
 <body>
     <div id="cookieConsentBanner">
         This site uses cookies to improve your experience.
@@ -88,10 +91,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
-                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'home' %}" data-section="home">Home</a>
-                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'services' %}" data-section="services">My Services</a>
-                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'blog:blogpost_list' %}" data-section="blog">Blog</a>
-                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="#" data-section="appointments">Book an Appointment</a>
+                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'home' %}"
+                                data-section="home">Home</a>
+                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start"
+                                href="{% url 'services' %}" data-section="services">My Services</a>
+                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start"
+                                href="{% url 'blog:blogpost_list' %}" data-section="blog">Blog</a>
+                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="#"
+                                data-section="appointments">Book an Appointment</a>
                         </div>
                     </div>
                 </div>
@@ -113,13 +120,16 @@
                     </div>
                     <nav class="social-icons col-12 col-md-6 text-center text-md-right" aria-labelledby="social-media">
                         <h2 id="social-media" class="sr-only">Social Media</h2>
-                        <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="text-white mx-2" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="text-white mx-2"
+                            aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com" target="_blank" rel="noopener" class="text-white mx-2" aria-label="GitHub">
+                        <a href="https://github.com" target="_blank" rel="noopener" class="text-white mx-2"
+                            aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="text-white mx-2" aria-label="TikTok">
+                        <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="text-white mx-2"
+                            aria-label="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
                         <a href="https://x.com" target="_blank" rel="noopener" class="text-white mx-2" aria-label="X">
@@ -129,8 +139,10 @@
                 </div>
             </div>
         </footer>
+
     </div>
     <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
 </body>
+
 </html>
