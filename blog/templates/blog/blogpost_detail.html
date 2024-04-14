@@ -69,18 +69,18 @@
                   <!-- Fallback Share Links (Hidden Initially) -->
                   <div id="fallbackShare" style="display: none;">
                       <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
-                         class="btn btn-outline-primary mt-2 comment-button">
+                         class="btn mt-2 comment-button">
                           Facebook <i class="fab fa-facebook-f"></i>
                       </a>
                       <a href="https://twitter.com/intent/tweet?text={{ blogpost.title|urlencode }}&url={{ request.build_absolute_uri }}"
-                         target="_blank" class="btn btn-outline-primary mt-2 comment-button">
+                         target="_blank" class="btn mt-2 comment-button">
                           Twitter <i class="fab fa-twitter"></i>
                       </a>
                       <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}"
-                         target="_blank" class="btn btn-outline-primary mt-2 comment-button">
+                         target="_blank" class="btn mt-2 comment-button">
                           LinkedIn <i class="fab fa-linkedin"></i>
                       </a>
-                      <button id="copyBtn" class="btn btn-outline-primary mt-2 comment-button">
+                      <button id="copyBtn" class="btn mt-2 comment-button">
                           Copy Link <i class="fas fa-clipboard"></i>
                       </button>
                   </div>

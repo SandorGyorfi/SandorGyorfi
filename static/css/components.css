@@ -188,32 +188,51 @@
   color: #000 !important;
 }
 
-/* Voting and comment Buttons Container */
-.vote-container button, .comment-container a, .comment-container button {
-  width: 100%;  
-  max-width: 250px;  
+/* Vote, comment and Share buttons. */
+.vote-container button,
+.comment-container a,
+.comment-container button,
+#shareBtn {  
+  width: 100%; 
+  max-width: 250px; 
   margin: 10px auto; 
-  display: block;  
+  display: block; 
 }
 
 @media (min-width: 768px) {
-  .vote-container button, .comment-container a, .comment-container button {
-      width: auto; 
-      flex: 1 1 auto;  
+  .vote-container, .comment-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: center; 
+  }
+
+  .vote-container button,
+  .comment-container a,
+  .comment-container button,
+  #shareBtn {  
+    flex: 1 1 150px; 
+    width: auto;
+    margin: 10px; 
+    max-width: 250px; 
+    display: inline-block; 
   }
 }
 
 #fallbackShare {
-  display: none;  
-  opacity: 0;     
-  transition: opacity 250ms ease-in-out; 
-  display: flex;
+  display: none;
+  background-color: #aeaeae;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
   flex-direction: column;
   border: 2px solid #007bff;
   border-radius: 0.375rem;
   padding: 1.5rem;
   margin-bottom: 1rem;
 }
+
+
+
 
 
 #vote-feedback {
