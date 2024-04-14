@@ -1,6 +1,11 @@
 file_paths = [
-    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\js\\custom.js",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\static\js\\contact.js"
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\admin.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\apps.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\models.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\forms.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\views.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\urls.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\contact\\templates\\contact\\contact_form.html"
 ]
 
 def print_file_content(file_path):
