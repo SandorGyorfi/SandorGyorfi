@@ -1,10 +1,11 @@
 file_paths = [
-    "C:\\ServerMini\\www.sandorgyorfi.com\\templates\\base.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\home\\templates\\home\\home.html",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\admin.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\apps.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\models.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\views.py",
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\urls.py",
     "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\services.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\service_detail.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_list.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_detail.html"
+    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\service_detail.html"
 ]
 
 def print_file_content(file_path):

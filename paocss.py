@@ -1,8 +1,8 @@
 file_paths = [
+    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\base.css",
     "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\navigation.css",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\layout.css",
     "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\components.css",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\base.css"
+    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\css\\layout.css"
 ]
 
 def print_file_content(file_path):

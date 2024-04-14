@@ -1,10 +1,5 @@
 file_paths = [
-    "C:\\ServerMini\\www.sandorgyorfi.com\\templates\\base.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\home\\templates\\home\\home.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\services.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\services\\templates\\services\\service_detail.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_list.html",
-    "C:\\ServerMini\\www.sandorgyorfi.com\\blog\\templates\\blog\\blogpost_detail.html"
+    "C:\\ServerMini\\www.sandorgyorfi.com\\static\\js\\custom.js"
 ]
 
 def print_file_content(file_path):

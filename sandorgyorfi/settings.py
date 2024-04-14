@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'home',
     'services',
     'blog',
-    'authenticator'
+    'authenticator',
+    'contact',
 ]
 
 MIDDLEWARE = [
