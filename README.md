@@ -29,9 +29,8 @@ With a Level 5 Diploma in Web Application Development, I specialize in back end 
 
 ## Latest Projects
 
-[![Latest Project](https://img.shields.io/badge/Latest%20Project-Coming%20Soon-g?style=for-the-badge)](https://github.com/SandorGyorfi/sgportfolio)
+[![Current Project](https://img.shields.io/badge/Current%20Project-Blob%20the%20Click%20Thief-blue?style=for-the-badge)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
 
-[![Latest Project](https://img.shields.io/badge/Latest%20Project-Coming%20Soon-g?style=for-the-badge)](https://github.com/SandorGyorfi/sgportfolio)
 
 ## Education & Career Transition
 
