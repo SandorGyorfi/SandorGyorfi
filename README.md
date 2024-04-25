@@ -1,6 +1,6 @@
 # Sandor Gyorfi
 
-**`Certified Web Developer (Back End/Front End/Full Stack)`**
+**`Certified Web Developer (Back-End/Front-End/Full Stack)`**
 
 With a Level 5 Diploma in Web Application Development, I specialize in back end and interactive front end development. My approach to web development ensures that user experience is at the core of all projects, leveraging the latest technologies to create seamless and dynamic online environments.
 
