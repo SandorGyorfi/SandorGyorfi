@@ -1,4 +1,4 @@
-# Sandor Gyorfi
+
 
 **`Certified Web Developer (Back-End/Front-End/Full Stack)`**
 
