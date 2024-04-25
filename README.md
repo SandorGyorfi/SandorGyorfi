@@ -86,6 +86,5 @@ Travelling is another thing I love to do that expands my view and gives me new i
 ## Contact
 
 [![Email](https://img.shields.io/badge/Email-%20-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:request@sandorgyorfi.com)
-[![Zoom](https://img.shields.io/badge/Zoom-%20-2d8cff?style=for-the-badge&logo=zoom&logoColor=white)](https://zoom.us/my/yourpersonalroom)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-%20-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/+447563713196)
 [![Signal](https://img.shields.io/badge/Signal-%20-3A76F0?style=for-the-badge&logo=signal&logoColor=white)](https://signal.me/#p/+447563713196)
