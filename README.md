@@ -31,6 +31,9 @@ With a Level 5 Diploma in Web Application Development, I specialize in back-end 
 
 [![Current Project](https://img.shields.io/badge/Current%20Project-Blob%20the%20Click%20Thief-blue?style=for-the-badge)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
 
+[![Current Project](https://img.shields.io/badge/Current%20Project-Blob%20the%20Click%20Thief-blue?style=for-the-badge)](https://github.com/SandorGyorfi/olivia-magyar)
+
+
 
 ## Education & Career Transition
 
