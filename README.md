@@ -27,11 +27,21 @@ With a Level 5 Diploma in Web Application Development, I specialize in back-end 
 
 ![Sandor Gyorfi's GitHub Stats](https://github-readme-stats.vercel.app/api?username=SandorGyorfi&show_icons=true&theme=gruvbox&border_radius=4)
 
-## Latest Projects
+## Current Project
 
-[![Current Project](https://img.shields.io/badge/Current%20Project-Blob%20the%20Click%20Thief-blue?style=for-the-badge)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
+[![Olivia Magyar's Website](https://img.shields.io/badge/Olivia%20Magyar's%20Website-cc00aa?style=for-the-badge)](https://github.com/SandorGyorfi/olivia-magyar)
 
-[![Current Project](https://img.shields.io/badge/Current%20Project-Olivia%20Magyar%20-blue?style=for-the-badge)](https://github.com/SandorGyorfi/olivia-magyar)
+## Previous Projects
+
+[![React | Blob the Click Thief](https://img.shields.io/badge/React%20|%20Blob_the_Click_Thief-61DAFB?style=for-the-badge&logo=react&logoColor=007ACC)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
+
+[![Django | FreqNest Webshop](https://img.shields.io/badge/Django%20|%20FreqNest_Webshop-092E20?style=for-the-badge&logo=django&logoColor=white)](https://github.com/SandorGyorfi/FreqNest)
+
+
+### More Projects
+
+[![More Projects](https://img.shields.io/badge/Click_Here_for_More_Projects-151B8D?style=for-the-badge&logoColor=151B8D&color=151B8D&labelColor=000000)](https://github.com/SandorGyorfi?tab=repositories)
+
 
 
 
