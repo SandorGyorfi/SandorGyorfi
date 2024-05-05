@@ -33,7 +33,7 @@ With a Level 5 Diploma in Web Application Development, I specialize in back-end 
 
 ## Previous Projects
 
-[![React | Blob the Click Thief](https://img.shields.io/badge/React%20|%20Blob_the_Click_Thief-61DAFB?style=for-the-badge&logo=react&logoColor=007ACC)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
+[![React | Blob the Click Thief](https://img.shields.io/badge/React%20|%20Blob_the_Click_Thief-61DAFB?style=for-the-badge&logo=react&logoColor=grey)](https://github.com/SandorGyorfi/Blob-the-Click-Thief)
 
 [![Django | FreqNest Webshop](https://img.shields.io/badge/Django%20|%20FreqNest_Webshop-092E20?style=for-the-badge&logo=django&logoColor=white)](https://github.com/SandorGyorfi/FreqNest)
 
