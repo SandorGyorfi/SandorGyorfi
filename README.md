@@ -27,7 +27,7 @@ With a Level 5 Diploma in Web Application Development, I specialize in back-end 
 
 ![Sandor Gyorfi's GitHub Stats](https://github-readme-stats.vercel.app/api?username=SandorGyorfi&show_icons=true&theme=gruvbox&border_radius=4)
 
-## Current Project
+## Current Ongoing Projects 
 
 [![Olivia Magyar's Website](https://img.shields.io/badge/Olivia%20Magyar's%20Website-cc00aa?style=for-the-badge)](https://github.com/SandorGyorfi/olivia-magyar)
 
