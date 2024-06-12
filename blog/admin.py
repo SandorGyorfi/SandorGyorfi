@@ -15,7 +15,5 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
-# Register your models here.
 admin.site.register(BlogPost, BlogPostAdmin)
 admin.site.register(Category, CategoryAdmin)
-

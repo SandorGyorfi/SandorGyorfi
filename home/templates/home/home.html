@@ -29,65 +29,27 @@
     </div>
 </section>
 
-
 <hr class="section-divider">
-<!-- Services Section in home.html -->
-<section class="services-section py-5 bg-light">
-    <div class="container">
-        <header class="mb-5 text-center">
-            <h2 class="section-title mb-3">Featured Services</h2>
-            <p class="lead text-muted">Discover tailored web solutions designed to empower and transform your digital presence.</p>
-        </header>
-        <div class="row">
-            {% for service in services %}
-            <div class="col-md-4 d-flex align-items-stretch">
-                <div class="card service-card mb-4">
-                    <div class="card-body d-flex flex-column">
-                        <h3 class="card-title">{{ service.title }}</h3>
-                        <p class="card-text flex-grow-1">{{ service.home_description }}</p>
-                        <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-2 align-self-start">
-                            Read More <span class="sr-only">about {{ service.title }}</span>
-                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <!-- Fiverr Section -->
-        <div class="row">
-            <div class="col-12 text-center mt-5">
-                <h3 class="section-title">Quick Front-End Services</h3>
-                <p class="lead">For smaller, quick-turnaround projects, you can also find me on Fiverr. This platform allows me to offer rapid, budget-friendly services like minor website updates, component tweaks, and custom CSS fixes.</p>
-                <p>Visit my Fiverr profile to see the services I offer, read client reviews, and get your projects started with just a few clicks. It's perfect for when you need something done right, and done fast.</p>
-                <a href="https://www.fiverr.com/yourusername" target="_blank" class="btn btn-outline-primary mt-2 align-self-start">
-                    Hire Me on Fiverr
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
-<hr class="section-divider">
-<!-- Blog Section -->
+<!-- Tumblr Blog Section -->
 <section class="blog-section py-5 bg-light">
     <div class="container">
         <header class="text-center mb-5">
-            <h2 class="section-title mb-3">Featured Blog Posts</h2>
-            <p class="lead text-muted">Explore my latest thoughts on technology and development.</p>
+            <h2 class="section-title mb-3">Featured Tumblr Posts</h2>
+            <p class="lead text-muted">Explore the latest updates from my Tumblr blog.</p>
         </header>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for post in latest_blog_posts %}
+            {% for post in tumblr_posts %}
             <div class="col">
                 <div class="card mb-4 h-100 shadow-sm border-0">
-                    <a href="{{ post.get_absolute_url }}">
-                        <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="{{ post.title }}" loading="lazy">
+                    <a href="{{ post.post_url }}" target="_blank">
+                        <img class="card-img-top" src="{{ post.photos.0.original_size.url }}" alt="{{ post.summary }}" loading="lazy">
                     </a>
                     <div class="card-body">
-                        <div class="small text-muted">{{ post.created_at|date:"F d, Y" }}</div>
+                        <div class="small text-muted">{{ post.date|date:"F d, Y" }}</div>
                         <h3 class="card-title h4">{{ post.title }}</h3>
-                        <p class="card-text">{{ post.excerpt }}</p>
-                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.get_absolute_url }}">
+                        <p class="card-text">{{ post.body|truncatewords:30 }}</p>
+                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.post_url }}" target="_blank">
                             Read more <span class="sr-only">about {{ post.title }}</span>
                             <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
                         </a>
@@ -95,9 +57,46 @@
                 </div>
             </div>
             {% endfor %}
-            {% if latest_blog_posts|length == 0 %}
+            {% if tumblr_posts|length == 0 %}
             <div class="col-12 text-center">
-                <p class="text-muted">No blog posts available at the moment. Please check back later.</p>
+                <p class="text-muted">No Tumblr posts available at the moment. Please check back later.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Media Blog Section -->
+<section class="blog-section py-5 bg-light">
+    <div class="container">
+        <header class="text-center mb-5">
+            <h2 class="section-title mb-3">Featured Media Blog Posts</h2>
+            <p class="lead text-muted">Explore my latest thoughts on technology and development from my media blog.</p>
+        </header>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for post in media_blog_posts %}
+            <div class="col">
+                <div class="card mb-4 h-100 shadow-sm border-0">
+                    <a href="{{ post.url }}" target="_blank">
+                        <img class="card-img-top" src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                    </a>
+                    <div class="card-body">
+                        <div class="small text-muted">{{ post.date|date:"F d, Y" }}</div>
+                        <h3 class="card-title h4">{{ post.title }}</h3>
+                        <p class="card-text">{{ post.excerpt }}</p>
+                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.url }}" target="_blank">
+                            Read more <span class="sr-only">about {{ post.title }}</span>
+                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% if media_blog_posts|length == 0 %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No media blog posts available at the moment. Please check back later.</p>
             </div>
             {% endif %}
         </div>

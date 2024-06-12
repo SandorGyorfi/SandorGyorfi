@@ -1,137 +1,71 @@
 {% extends "base.html" %}
-{% load blog_extras %}
 
 {% block content %}
-<!-- Page content-->
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-8">
-      <!-- Post content-->
       <article>
-        <!-- Post header-->
         <header class="mb-4">
-          <!-- Post title-->
-          <h1 class="fw-bolder mb-1">{{ blogpost.title }}</h1>
-          <!-- Post slug-->
-          <h2 class="fw-light mb-1">{{ blogpost.slug }}</h2>
-          <!-- Post meta content-->
-          <div class="text-muted fst-italic mb-2">Posted on {{ blogpost.created_at|date:'F d, Y' }} by {{
-            blogpost.author.username }}
-          </div>
-          <!-- Post updated at-->
-          <div class="text-muted fst-italic mb-2">Last updated on <time
-              datetime="{{ blogpost.updated_at|date:'Y-m-d' }}">{{ blogpost.updated_at|date:'F d, Y' }}</time></div>
-          <!-- Post categories-->
-          <div>
-            {% for category in blogpost.categories.all %}
-            <a class="badge bg-secondary text-decoration-none link-light" href="#"
-              aria-label="Category: {{ category.name }}">{{ category.name }}</a>
-            {% endfor %}
-          </div>
+          <h1 class="fw-bolder mb-1">{{ post_detail.title|default:post_detail.summary|default:"No Title" }}</h1>
+          <div class="text-muted fst-italic mb-2">Posted on {{ post_detail.date|date:'F d, Y' }}</div>
         </header>
-        <!-- Preview image figure-->
         <figure class="mb-4">
-          {% if blogpost.image %}
-          <img class="img-fluid rounded" src="{{ blogpost.image.url }}" alt="{{ blogpost.title }}" />
+          {% if post_detail.photos %}
+          <img class="img-fluid rounded" src="{{ post_detail.photos.0.original_size.url }}" alt="{{ post_detail.summary|default:"No Title" }}" />
           {% else %}
-          <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-            alt="default image for {{ blogpost.title }}" />
+          <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="default image for {{ post_detail.summary|default:"No Title" }}" />
           {% endif %}
         </figure>
-        <!-- Post content-->
         <section class="mb-5">
-          <div class="comment-container">
-              {{ blogpost.content|linebreaks }}
-      
-              <div class="social-discussion-buttons text-center mt-4">
-                  <!-- LinkedIn -->
-                  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}"
-                     class="btn btn-outline-primary mt-2 comment-button" target="_blank">
-                      Discuss on LinkedIn <i class="fab fa-linkedin"></i>
-                  </a>
-      
-                  <!-- X -->
-                  <a href="https://x.com/intent/tweet?text=Check out this blog post&url={{ request.build_absolute_uri }}"
-                     class="btn btn-outline-primary mt-2 comment-button" target="_blank">
-                      Discuss on X <i class="fab fa-twitter"></i>
-                  </a>
-      
-                  <!-- GitHub, if applicable -->
-                  <a href="https://github.com/your-repo/your-project/issues/new?title=Discussion about {{ blogpost.title|urlencode }}"
-                     class="btn btn-outline-primary mt-2 comment-button" target="_blank">
-                      Discuss on GitHub <i class="fab fa-github"></i>
-                  </a>
-                  <!-- Share Button -->
-                  <button id="shareBtn" class="btn btn-outline-primary mt-2 comment-button">
-                      Share <i class="fas fa-share-alt"></i>
-                  </button>
-      
-                  <!-- Fallback Share Links (Hidden Initially) -->
-                  <div id="fallbackShare" style="display: none;">
-                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
-                         class="btn mt-2 comment-button">
-                          Facebook <i class="fab fa-facebook-f"></i>
-                      </a>
-                      <a href="https://twitter.com/intent/tweet?text={{ blogpost.title|urlencode }}&url={{ request.build_absolute_uri }}"
-                         target="_blank" class="btn mt-2 comment-button">
-                          Twitter <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}"
-                         target="_blank" class="btn mt-2 comment-button">
-                          LinkedIn <i class="fab fa-linkedin"></i>
-                      </a>
-                      <button id="copyBtn" class="btn mt-2 comment-button">
-                          Copy Link <i class="fas fa-clipboard"></i>
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </section>
-      
-
-
-      </article>
-      <!-- Poll Voting Section -->
-      <section class="poll-voting-section bg-light py-4 my-4">
-        <div class="container">
-          <h4 class="text-center mb-4">Any Feedback? Let Me Know!</h4>
-          <div id="vote-feedback" style="text-align: center; margin-top: 20px;"></div>
-          <div class="vote-container">
-            {% for key, display_name in choices.items %}
-            <button type="button" class="btn btn-outline-primary mt-2 align-self-start vote-button"
-              data-vote-type="{{ key }}" data-post-id="{{ blogpost.pk }}">
-              {{ display_name }} - <span id="vote_{{ key }}_percent">
-                {{ vote_percentages|get_item:key|floatformat:"1" }}%
-              </span>
+          <p>{{ post_detail.body|linebreaks }}</p>
+        </section>
+        <div class="social-discussion-buttons text-center mt-4">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" class="btn btn-outline-primary mt-2 comment-button" target="_blank">
+            Discuss on LinkedIn <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://x.com/intent/tweet?text=Check out this blog post&url={{ request.build_absolute_uri }}" class="btn btn-outline-primary mt-2 comment-button" target="_blank">
+            Discuss on X <i class="fab fa-twitter"></i>
+          </a>
+          <button id="shareBtn" class="btn btn-outline-primary mt-2 comment-button">
+            Share <i class="fas fa-share-alt"></i>
+          </button>
+          <div id="fallbackShare" style="display: none;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn mt-2 comment-button">
+              Facebook <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text={{ post_detail.summary|default:"No Title"|urlencode }}&url={{ request.build_absolute_uri }}" target="_blank" class="btn mt-2 comment-button">
+              Twitter <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" target="_blank" class="btn mt-2 comment-button">
+              LinkedIn <i class="fab fa-linkedin"></i>
+            </a>
+            <button id="copyBtn" class="btn mt-2 comment-button">
+              Copy Link <i class="fas fa-clipboard"></i>
             </button>
-            {% endfor %}
           </div>
         </div>
-      </section>
+      </article>
     </div>
-    <!-- Side widgets-->
     <div class="col-lg-4">
-      <!-- Search widget-->
       <div class="card mb-3">
         <div class="card-header">Search</div>
         <div class="card-body">
           <div class="input-group">
-            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..."
-              aria-describedby="button-search" />
+            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
             <button class="btn btn-outline-primary mt-2 align-self-start" id="button-search" type="button">Go!</button>
           </div>
         </div>
       </div>
-      <!-- Categories widget-->
       <div class="card mb-4">
         <div class="card-header">Categories</div>
         <div class="card-body">
           <div class="row">
             <div class="col">
               <ul class="list-unstyled mb-0">
-                {% for category in categories %}
-                <li><a href="{{ post.get_absolute_url }}">{{ category.name }}</a></li>
-                {% endfor %}
+                <!-- Categories can be static or fetched from an API if necessary -->
+                <li><a href="#">Category 1</a></li>
+                <li><a href="#">Category 2</a></li>
+                <li><a href="#">Category 3</a></li>
               </ul>
             </div>
           </div>
@@ -139,4 +73,5 @@
       </div>
     </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

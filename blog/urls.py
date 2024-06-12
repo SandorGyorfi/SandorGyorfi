@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import BlogPostListView, BlogPostDetailView, submit_vote
+from .views import BlogPostListView, TumblrPostDetailView
 
 urlpatterns = [
     path('', BlogPostListView.as_view(), name='blogpost_list'),
-    path('post/<int:pk>/', BlogPostDetailView.as_view(), name='blog_detail'),
-    path('post/<int:pk>/vote/', submit_vote, name='submit_vote'),
+    path('tumblr/post/<str:post_id>/', TumblrPostDetailView.as_view(), name='tumblr_post_detail'),
 ]

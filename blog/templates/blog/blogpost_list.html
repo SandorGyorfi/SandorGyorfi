@@ -4,7 +4,7 @@
 <header class="blog-header py-5 border-bottom mb-4">
   <div class="container">
     <div class="header-content text-center my-5">
-      <h1 class="fw-bolder">Exploring Technology and Innovation</h1>
+      <h1 class="fw-bolder">Exploring Technology and Innovation</h1> 
       <p class="lead mb-3">Dive into the latest trends, insights, and discussions at the intersection of technology, business, and creativity.</p>
     </div>
   </div>
@@ -12,81 +12,36 @@
 <!-- Page content-->
 <div class="container">
   <div class="row">
-    <!-- Blog entries-->
+    <!-- Tumblr Blog entries-->
     <div class="col-lg-8">
-      <!-- Featured blog post-->
-      {% with blogposts.first as featured_post %}
-      <article class="card mb-4">
-        <a href="{{ featured_post.get_absolute_url }}" aria-label="Read more about {{ featured_post.title }}">
-          <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="Featured image for {{ featured_post.title }}" />
-        </a>
-        <div class="card-body">
-          <time class="small text-muted" datetime="{{ featured_post.created_at|date:"Y-m-d" }}">{{ featured_post.created_at|date:"F d, Y" }}</time>
-          <h2 class="card-title">{{ featured_post.title }}</h2>
-          <p class="card-text">{{ featured_post.content|truncatewords:30 }}</p>
-          <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ featured_post.get_absolute_url }}" aria-label="Read more about {{ featured_post.title }}">Read more <span class="sr-only">{{ featured_post.title }}</span></a>
-        </div>
-      </article>
-      {% endwith %}
-      <!-- Nested row for non-featured blog posts-->
       <div class="row">
-        {% for blogpost in blogposts %}
-        {% if not forloop.first %}
+        {% for post in tumblr_posts %}
         <div class="col-lg-6">
-          <!-- Blog post-->
           <article class="card mb-4">
-            <a href="{{ blogpost.get_absolute_url }}" aria-label="Read more about {{ blogpost.title }}">
-              <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="Image for {{ blogpost.title }}" />
+            <a href="{% url 'tumblr_post_detail' post.id %}" aria-label="Read more about {{ post.summary|default:"No Title" }}">
+              {% if post.photos %}
+              <img class="card-img-top" src="{{ post.photos.0.original_size.url }}" alt="{{ post.summary|default:"No Title" }}" loading="lazy">
+              {% else %}
+              <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="{{ post.summary|default:"No Title" }}" loading="lazy">
+              {% endif %}
             </a>
             <div class="card-body">
-              <time class="small text-muted" datetime="{{ blogpost.created_at|date:"Y-m-d" }}">{{ blogpost.created_at|date:"F d, Y" }}</time>
-              <h3 class="card-title h4">{{ blogpost.title }}</h3>
-              <p class="card-text">{{ blogpost.content|truncatewords:20 }}</p>
-              <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ blogpost.get_absolute_url }}" aria-label="Read more about {{ blogpost.title }}">Read more <span class="sr-only">{{ blogpost.title }}</span></a>
+              <time class="small text-muted" datetime="{{ post.date|date:"Y-m-d" }}">{{ post.date|date:"F d, Y" }}</time>
+              <h3 class="card-title h4">{{ post.summary|default:"No Title" }}</h3>
+              <p class="card-text">{{ post.body|truncatewords:20 }}</p>
+              <a class="btn btn-outline-primary mt-2 align-self-start" href="{% url 'tumblr_post_detail' post.id %}" aria-label="Read more about {{ post.summary|default:"No Title" }}">
+                Read more <span class="sr-only">{{ post.summary|default:"No Title" }}</span>
+              </a>
             </div>
           </article>
         </div>
-        {% endif %}
-        {% empty %}
-        <p>No blog posts yet.</p>
         {% endfor %}
+        {% if tumblr_posts|length == 0 %}
+        <div class="col-12 text-center">
+          <p class="text-muted">No Tumblr posts available at the moment. Please check back later.</p>
+        </div>
+        {% endif %}
       </div>
-      <!-- Pagination-->
-      <nav aria-label="Pagination">
-        <ul class="pagination justify-content-center my-4">
-          {% if page_obj.number > 2 %}
-            <li class="page-item">
-              <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page=1"><i class="fa-solid fa-backward"></i> First</a>
-            </li>
-          {% endif %}
-          {% if page_obj.has_previous %}
-            <li class="page-item">
-              <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-caret-left"></i> Previous</a>
-            </li>
-          {% endif %}
-          {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-              <li class="page-item active" aria-current="page">
-                <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page={{ num }}">{{ num }}</a>
-              </li>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-              <li class="page-item">
-                <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page={{ num }}">{{ num }}</a>
-              </li>
-            {% endif %}
-          {% endfor %}
-          {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page={{ page_obj.next_page_number }}">Next <i class="fa-solid fa-caret-right"></i></a>
-            </li>
-          {% endif %}
-          {% if page_obj.paginator.num_pages > page_obj.number|add:2 %}
-            <li class="page-item">
-              <a class="page-link btn btn-outline-primary btn-sm-pagination" href="?page={{ page_obj.paginator.num_pages }}">Last <i class="fa-solid fa-forward"></i></a>
-            </li>
-          {% endif %}
-        </ul>
-      </nav>
     </div>
     <!-- Side widgets-->
     <div class="col-lg-4">
@@ -108,9 +63,10 @@
           <div class="row">
             <div class="col">
               <ul class="list-unstyled mb-0">
-                {% for category in categories %}
-                <li><a href="{{ post.get_absolute_url }}">{{ category.name }}</a></li>
-                {% endfor %}
+                <!-- Categories can be static or fetched from an API if necessary -->
+                <li><a href="#">Category 1</a></li>
+                <li><a href="#">Category 2</a></li>
+                <li><a href="#">Category 3</a></li>
               </ul>
             </div>
           </div>
@@ -119,8 +75,7 @@
       <!-- Side widget-->
       <div class="card mb-4">
         <div class="card-header">Side Widget</div>
-        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and
-          feature the Bootstrap 5 card component!</div>
+        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
       </div>
     </div>
   </div>

@@ -1,93 +1,41 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
-from django.views.generic import ListView, DetailView
-from django.urls import reverse
-from django.views.decorators.http import require_POST
-from.models import BlogPost, Category
-from.forms import BlogPostVoteForm
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse, Http404
+from django.views.generic import View
+import requests
 import json
 
+class BlogPostListView(View):
+    def get(self, request):
+        tumblr_api_url = "https://api.tumblr.com/v2/blog/your-tumblr-blog.tumblr.com/posts"
+        tumblr_posts = []
+        try:
+            tumblr_response = requests.get(tumblr_api_url, params={'api_key': 'your_tumblr_api_key', 'limit': 10})
+            tumblr_response_json = tumblr_response.json()
+            if isinstance(tumblr_response_json, dict) and 'response' in tumblr_response_json:
+                tumblr_posts = tumblr_response_json['response'].get('posts', [])
+        except Exception as e:
+            print(f"Error fetching Tumblr posts: {e}")
 
-
-class BlogPostListView(ListView):
-    model = BlogPost
-    template_name = 'blog/blogpost_list.html'
-    context_object_name = 'blogposts'
-    paginate_by = 3
-
-    def get_queryset(self):
-        return super().get_queryset().order_by('-created_at')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['vote_form'] = BlogPostVoteForm()
-        context['choices'] = ['needs_work', 'meh', 'interesting', 'game_changer']
-        return context
-
-
-class BlogPostDetailView(DetailView):
-    model = BlogPost
-    template_name = 'blog/blogpost_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        blogpost = context.get('blogpost')
-
-        friendly_names = {
-            'needs_work': 'Needs Work',
-            'meh': 'Meeeh',
-            'interesting': 'Interesting',
-            'game_changer': 'Game Changer'
+        context = {
+            'tumblr_posts': tumblr_posts
         }
-        
-        context['choices'] = friendly_names  
-        context['vote_form'] = BlogPostVoteForm()
+        return render(request, 'blog/blogpost_list.html', context)
 
-        total_votes = sum(getattr(blogpost, f"{choice}_votes") for choice in friendly_names)
-        context['vote_percentages'] = {
-            choice: (getattr(blogpost, f"{choice}_votes") / total_votes * 100 if total_votes > 0 else 0)
-            for choice in friendly_names 
-        }
+class TumblrPostDetailView(View):
+    def get(self, request, post_id):
+        tumblr_api_url = f"https://api.tumblr.com/v2/blog/your-tumblr-blog.tumblr.com/posts/{post_id}"
+        post_detail = {}
+        try:
+            response = requests.get(tumblr_api_url, params={'api_key': 'your_tumblr_api_key'})
+            response_json = response.json()
+            if isinstance(response_json, dict) and 'response' in response_json:
+                posts = response_json['response'].get('posts', [])
+                if posts:
+                    post_detail = posts[0]
+                else:
+                    raise Http404("Post not found")
+        except Exception as e:
+            print(f"Error fetching Tumblr post detail: {e}")
+            raise Http404("Error fetching post details")
 
-        return context
-
-
-
-@require_POST
-def submit_vote(request, pk):
-    if not request.user.is_authenticated:
-        return JsonResponse({'error': 'Authentication required'}, status=403)
-
-    try:
-        data = json.loads(request.body)
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Invalid JSON'}, status=400)
-
-    try:
-        friendly_to_system = {
-            'needs_work': 'needs_work',
-            'meh': 'meh',
-            'interesting': 'interesting',
-            'game_changer': 'game_changer'
-        }
-
-        vote_type = data.get('vote')
-        system_vote_type = friendly_to_system.get(vote_type)
-
-        if system_vote_type is None:
-            return JsonResponse({'error': 'Invalid vote type'}, status=400)
-
-        blog_post = get_object_or_404(BlogPost, pk=pk)
-        current_votes = getattr(blog_post, f'{system_vote_type}_votes', 0)
-        setattr(blog_post, f'{system_vote_type}_votes', current_votes + 1)
-        blog_post.save()
-
-        vote_counts = {choice: getattr(blog_post, f'{choice}_votes') for choice in friendly_to_system.values()}
-        total_votes = sum(vote_counts.values())
-        percentages = {k: (v / total_votes * 100 if total_votes > 0 else 0) for k, v in vote_counts.items()}
-
-        return JsonResponse({'success': True, 'percentages': percentages})
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        return render(request, 'blog/tumblr_post_detail.html', {'post_detail': post_detail})

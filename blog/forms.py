@@ -8,4 +8,3 @@ class BlogPostVoteForm(forms.Form):
         ('game_changer', 'Game Changer'),
     )
     vote = forms.ChoiceField(choices=VOTE_CHOICES, widget=forms.RadioSelect)
-
