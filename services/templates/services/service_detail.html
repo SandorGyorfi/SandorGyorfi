@@ -1,17 +1,40 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}{{ service.title }} - Sandor Gyorfi{% endblock %}
-
 {% block content %}
-<section class="service-detail-section py-5">
+<!-- Service Detail Section -->
+<section class="hero-introduction-section py-5 bg-light">
     <div class="container">
-        <h1 class="service-title mb-3">{{ service.title }}</h1>
-        <div class="service-description">
-            {{ service.description|linebreaks }}
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h1 class="section-title mb-3">{{ service.title }}</h1>
+                <p class="lead text-muted">Expertise & Excellence in {{ service.title }}</p>
+                <div class="service-description">
+                    {{ service.description|linebreaks }}
+                </div>
+                {% if service.link %}
+                    <div class="text-center mt-4">
+                        <a href="{{ service.link }}" class="btn btn-outline-primary mt-2 align-self-start" aria-label="Visit {{ service.title }} link">Visit Link</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-        {% if service.link %}
-            <a href="{{ service.link }}" class="btn btn-outline-primary mt-2 align-self-start" aria-label="Visit {{ service.title }} link">Visit Link</a>
-        {% endif %}
     </div>
 </section>
+
+<hr class="section-divider">
+
+<!-- Contact Section -->
+<section class="contact-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mx-auto text-center">
+                <h2 class="section-title mb-3">Get in Touch</h2>
+                <p class="lead text-muted">Have any questions or need further information about {{ service.title }}? Feel free to contact me.</p>
+                <a href="/contact" class="btn btn-outline-primary mt-2">Contact Me</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
