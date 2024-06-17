@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Confirmation</title>
+</head>
+<body>
+    <h1>Thank you for contacting me, {{ contact.first_name }}!</h1>
+    <p>We have received your message regarding "{{ contact.get_subject_display }}" and will get back to you as soon as possible.</p>
+    <p>Here is a copy of your message:</p>
+    <blockquote>
+        {{ contact.message }}
+    </blockquote>
+    <p>Best regards,<br>Sandor Gyorfi</p>
+</body>
+</html>

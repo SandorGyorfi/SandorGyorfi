@@ -4,11 +4,13 @@ from .models import Contact
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['name', 'email', 'subject', 'message']
+        fields = ['first_name', 'last_name', 'email', 'subject', 'message']
         widgets = {
-            'subject': forms.Select(attrs={
-                'class': 'form-control custom-select',
-            })
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'subject': forms.Select(attrs={'class': 'form-control custom-select'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Message'}),
         }
 
     def __init__(self, *args, **kwargs):

@@ -22,23 +22,32 @@
                 </div>
                 {% endif %}
 
-                <form method="post" class="contact-form" action="{% url 'contact' %}">
+                <form method="post" class="contact-form needs-validation" action="{% url 'contact' %}" novalidate>
                     {% csrf_token %}
                     <div class="form-group mb-3">
-                        <label for="id_name">Name:</label>
-                        {{ form.name|add_class:"form-control" }}
+                        <label for="id_first_name">First Name:</label>
+                        {{ form.first_name|add_class:"form-control" }}
+                        <div class="invalid-feedback">First name is required.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_last_name">Last Name:</label>
+                        {{ form.last_name|add_class:"form-control" }}
+                        <div class="invalid-feedback">Last name is required.</div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="id_email">Email:</label>
                         {{ form.email|add_class:"form-control" }}
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="id_subject">Subject:</label>
-                        {{ form.subject|add_class:"form-control custom-select" }}  
+                        {{ form.subject|add_class:"form-control custom-select" }}
+                        <div class="invalid-feedback">Subject is required.</div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="id_message">Message:</label>
                         {{ form.message|add_class:"form-control" }}
+                        <div class="invalid-feedback">Please enter your message.</div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-outline-primary mt-2 align-self-start">
@@ -50,4 +59,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 {% endblock %}
