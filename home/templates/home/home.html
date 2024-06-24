@@ -1,28 +1,68 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - Sandor Gyorfi{% endblock %}
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-introduction-section py-5 bg-light">
+<section class="hero-section py-5 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mx-auto">
                 <h1 class="section-title mb-3">Innovative Web Solutions</h1>
                 <p class="lead text-muted">Crafting impactful digital experiences with a fresh perspective.</p>
-                <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create
-                    web solutions that bridge the gap between user needs and business goals. My approach combines
-                    strategic thinking with technical prowess to develop websites and applications that are not only
-                    aesthetically pleasing but also functionally robust.</p>
-                <p>My journey in web development is marked by a relentless pursuit of excellence and innovation.
-                    Leveraging the latest technologies, I aim to deliver experiences that captivate and engage, ensuring
-                    that each project surpasses expectations. My background in business enhances my ability to
-                    understand and align with client objectives, providing a unique advantage in the digital landscape.
-                </p>
-                <p>Discover how my services can transform your digital presence. Whether you're looking for a
-                    partnership that elevates your online identity or seeking innovative solutions, let's make it
-                    happen.</p>
-                <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline-primary mt-2 align-self-start">Explore My Portfolio</a>
+                <p>Hello, I'm Sandor. With a solid foundation in business and a fervent passion for technology, I create web solutions that bridge the gap between user needs and business goals. My approach combines strategic thinking with technical prowess to develop websites and applications that are not only aesthetically pleasing but also functionally robust.</p>
+                <p>My journey in web development is marked by a relentless pursuit of excellence and innovation. Leveraging the latest technologies, I aim to deliver experiences that captivate and engage, ensuring that each project surpasses expectations. My background in business enhances my ability to understand and align with client objectives, providing a unique advantage in the digital landscape.</p>
+                <p>Discover how my services can transform your digital presence. Whether you're looking for a partnership that elevates your online identity or seeking innovative solutions, let's make it happen.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Qualification Section -->
+<section class="qualification-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h2 class="section-title mb-3">My Qualifications</h2>
+                <p class="lead text-muted">Certified expertise to ensure top-notch web development services.</p>
+                <div class="card mb-4 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Gateway Qualifications Level 5 Diploma in Web Application Development</h3>
+                        <p class="card-text">Awarded by City of Bristol College on 02 Feb 2024</p>
+                        <p class="card-text"><strong>Credits:</strong> 50 Credits at Level 5, 25 Credits at Level 6</p>
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <iframe src="{% static 'img/eCertificate [Gyorfi, Sandor 03-04-1985] [Q] Gateway Qualifications Level 5 Diploma in Web Application Development.pdf' %}" width="100%" height="500px" style="border: none;" oncopy="return false" oncontextmenu="return false;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Portfolio Section -->
+<section class="portfolio-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h2 class="section-title mb-3">Portfolio</h2>
+                <p class="lead text-muted">Explore some of the projects I have worked on.</p>
+                <div class="row">
+                    <!-- Client Website: Olivia Magyar -->
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Client Website: Olivia Magyar</h3>
+                                <img src="{% static 'img/om_screenshot.png' %}" alt="Olivia Magyar Website Screenshot" class="img-fluid" style="width: 40%; height: auto; max-height: 550px;">
+                                <p class="card-text mt-3">A comprehensive project that showcases the best practices in modern web development.</p>
+                                <a href="https://sandorgyorfi.github.io/olivia-magyar/" class="btn btn-outline-primary mt-2" target="_blank">Visit Project</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,73 +72,35 @@
 <hr class="section-divider">
 
 <!-- Tumblr Blog Section -->
-<section class="blog-section py-5 bg-light">
+<section class="tumblr-blog-section py-5 bg-light">
     <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="section-title mb-3">Featured Tumblr Posts</h2>
-            <p class="lead text-muted">Explore the latest updates from my Tumblr blog.</p>
-        </header>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for post in tumblr_posts %}
-            <div class="col">
-                <div class="card mb-4 h-100 shadow-sm border-0">
-                    <a href="{{ post.post_url }}" target="_blank">
-                        <img class="card-img-top" src="{{ post.photos.0.original_size.url }}" alt="{{ post.summary }}" loading="lazy">
-                    </a>
-                    <div class="card-body">
-                        <div class="small text-muted">{{ post.date|date:"F d, Y" }}</div>
-                        <h3 class="card-title h4">{{ post.title }}</h3>
-                        <p class="card-text">{{ post.body|truncatewords:30 }}</p>
-                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.post_url }}" target="_blank">
-                            Read more <span class="sr-only">about {{ post.title }}</span>
-                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
-                        </a>
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h2 class="section-title mb-3">Featured Tumblr Posts</h2>
+                <p class="lead text-muted">Explore the latest updates from my Tumblr blog.</p>
+                <div class="row">
+                    {% for post in tumblr_posts %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm border-0">
+                            <a href="{{ post.post_url }}" target="_blank">
+                                <img class="card-img-top" src="{{ post.photos.0.original_size.url }}" alt="{{ post.summary }}" loading="lazy">
+                            </a>
+                            <div class="card-body">
+                                <div class="small text-muted">{{ post.date|date:"F d, Y" }}</div>
+                                <h3 class="card-title h4">{{ post.title }}</h3>
+                                <p class="card-text">{{ post.body|truncatewords:30 }}</p>
+                                <a class="btn btn-outline-primary mt-2" href="{{ post.post_url }}" target="_blank">Read more</a>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
+                    {% if tumblr_posts|length == 0 %}
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No Tumblr posts available at the moment. Please check back later.</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-            {% endfor %}
-            {% if tumblr_posts|length == 0 %}
-            <div class="col-12 text-center">
-                <p class="text-muted">No Tumblr posts available at the moment. Please check back later.</p>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-</section>
-
-<hr class="section-divider">
-
-<!-- Media Blog Section -->
-<section class="blog-section py-5 bg-light">
-    <div class="container">
-        <header class="text-center mb-5">
-            <h2 class="section-title mb-3">Featured Media Blog Posts</h2>
-            <p class="lead text-muted">Explore my latest thoughts on technology and development from my media blog.</p>
-        </header>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for post in media_blog_posts %}
-            <div class="col">
-                <div class="card mb-4 h-100 shadow-sm border-0">
-                    <a href="{{ post.url }}" target="_blank">
-                        <img class="card-img-top" src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
-                    </a>
-                    <div class="card-body">
-                        <div class="small text-muted">{{ post.date|date:"F d, Y" }}</div>
-                        <h3 class="card-title h4">{{ post.title }}</h3>
-                        <p class="card-text">{{ post.excerpt }}</p>
-                        <a class="btn btn-outline-primary mt-2 align-self-start" href="{{ post.url }}" target="_blank">
-                            Read more <span class="sr-only">about {{ post.title }}</span>
-                            <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% if media_blog_posts|length == 0 %}
-            <div class="col-12 text-center">
-                <p class="text-muted">No media blog posts available at the moment. Please check back later.</p>
-            </div>
-            {% endif %}
         </div>
     </div>
 </section>
