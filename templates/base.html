@@ -2,6 +2,7 @@
 {% load static %}
 
 <html lang="en">
+
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RETHLPZ6G"></script>
     <script>
@@ -17,10 +18,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">       
-    <link rel="stylesheet" href="{% static 'css/components.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/navigation.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/layout.css' %}">     
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         #cookieConsentBanner {
@@ -52,19 +53,20 @@
         }
     </style>
 </head>
+
 <body>
     <div id="cookieConsentBanner">
         This site uses cookies to improve your experience.
         <button class="btn btn-outline-primary mt-2 align-self-start" id="acceptCookies">Accept</button>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {  
-            var consent = localStorage.getItem('cookieConsent');     
+        document.addEventListener('DOMContentLoaded', function () {
+            var consent = localStorage.getItem('cookieConsent');
             if (!consent) {
                 document.getElementById('cookieConsentBanner').style.display = 'block';
             }
             document.getElementById('acceptCookies').addEventListener('click', function () {
-                localStorage.setItem('cookieConsent', 'true');       
+                localStorage.setItem('cookieConsent', 'true');
                 document.getElementById('cookieConsentBanner').style.display = 'none';
             });
         });
@@ -84,18 +86,19 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>    
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
                             <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'home' %}"
                                 data-section="home">Home</a>
                             <a class="nav-link btn btn-outline-primary mt-auto align-self-start"
-                                href="{% url 'services' %}" data-section="services">My Services</a>
+                                href="{% url 'services:services' %}" data-section="services">My Services</a>
+
                             <a class="nav-link btn btn-outline-primary mt-auto align-self-start"
                                 href="{% url 'blog:blogpost_list' %}" data-section="blog">Blog</a>
-                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start" href="{% url 'contact' %}"
-                                data-section="appointments">Contact</a>
+                            <a class="nav-link btn btn-outline-primary mt-auto align-self-start"
+                                href="{% url 'contact' %}" data-section="appointments">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
             {% block content %}
             {% endblock %}
         </main>
-        <footer class="footer mt-auto py-1 bg-dark text-white">      
+        <footer class="footer mt-auto py-1 bg-dark text-white">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6 text-center text-md-left mb-3 mb-md-0">
@@ -137,8 +140,9 @@
             </div>
         </footer>
     </div>
-    <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script> 
+    <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
     <script src="{% static 'js/contact.js' %}"></script>
 </body>
+
 </html>

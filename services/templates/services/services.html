@@ -18,7 +18,7 @@
                             <div class="service-short-description card-text">
                                 {{ service.short_description|linebreaks }}
                             </div>
-                            <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-primary mt-auto align-self-start">
+                            <a href="{% url 'services:service_detail' service.pk %}" class="btn btn-outline-primary mt-auto align-self-start">
                                 Read More <span class="sr-only">about {{ service.title }}</span>
                                 <i class="fa-solid fa-caret-right" aria-hidden="true"></i>
                             </a>
@@ -30,6 +30,33 @@
                     <p class="text-center">I'm currently updating my services to bring you the latest and greatest. Check back soon!</p>
                 </div>
             {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if services.has_other_pages %}
+                <ul class="pagination justify-content-center">
+                    {% if services.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ services.previous_page_number }}">Previous</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">&laquo; First</span></li>
+                        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    {% endif %}
+                    {% for i in services.paginator.page_range %}
+                        {% if services.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if services.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ services.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ services.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">Next</span></li>
+                        <li class="page-item disabled"><span class="page-link">Last &raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </section>
