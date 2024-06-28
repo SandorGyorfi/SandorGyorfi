@@ -6,7 +6,6 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import logging
 
-# Setting up logging
 logger = logging.getLogger(__name__)
 
 def contact_view(request):
