@@ -1,13 +1,16 @@
 # Györfi Sándor
 
-Full-stack developer.
+Software Engineer
 
 ---
 
-| Area | Stack |
-|------|-------|
-| **Frontend** | Next.js, React, TypeScript, Tailwind CSS, GSAP, Framer Motion |
-| **Backend** | Django, DRF, NestJS, Node.js, Celery |
-| **Data** | PostgreSQL, Supabase, Firebase, Redis |
-| **Desktop** | Tauri, Rust |
-| **Infrastructure** | Docker, Cloudflare, GitHub Actions, Railway |
+| | |
+|:--|:--|
+| **Languages** | TypeScript, Python, Rust |
+| **Frontend** | Next.js, React, Tailwind CSS, GSAP, Framer Motion |
+| **Backend** | Django, Django REST Framework, NestJS, Node.js, Celery |
+| **Databases** | PostgreSQL, PostGIS, Supabase, Firebase, Redis |
+| **Desktop** | Tauri |
+| **Payments** | Stripe, Paddle |
+| **Infrastructure** | Docker, Cloudflare, Railway, GitHub Actions, Sentry |
+| **Other** | OCR, AI APIs, WebSockets, i18n, S3 |
