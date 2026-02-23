@@ -1,3 +1,3 @@
-<p align="center">
-  <img src="terminal.svg" alt="terminal" width="800"/>
-</p>
+# Hi, I'm Sandor
+
+Full-stack developer. I share useful dev stuff here.
