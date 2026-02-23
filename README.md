@@ -10,4 +10,4 @@ Full-stack developer.
 | **Backend** | Django, DRF, NestJS, Node.js, Celery |
 | **Data** | PostgreSQL, Supabase, Firebase, Redis |
 | **Desktop** | Tauri, Rust |
-| **Infra** | Docker, Cloudflare, GitHub Actions, Railway |
+| **Infrastructure** | Docker, Cloudflare, GitHub Actions, Railway |
