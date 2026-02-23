@@ -51,6 +51,3 @@ I work across the entire stack: web, desktop, real-time systems, and AI-powered 
 ![Railway](https://img.shields.io/badge/Railway-0B0D0E?style=flat&logo=railway&logoColor=fff)
 ![Sentry](https://img.shields.io/badge/Sentry-362D59?style=flat&logo=sentry&logoColor=fff)
 
----
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=SandorGyorfi&show_icons=true&theme=dark&hide_border=true&hide_title=true&count_private=true)
